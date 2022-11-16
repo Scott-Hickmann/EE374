@@ -16,7 +16,7 @@ export default function TitleSection() {
     >
       <Box w="full" h={200} position="relative">
         <Image
-          src="/images/birds.png"
+          src="./images/birds.png"
           alt="Birds"
           fill
           style={{ objectFit: 'contain' }}
