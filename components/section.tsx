@@ -26,7 +26,7 @@ export function Sections({ children }: SectionsProps) {
 
 export function Section({ id, bg, color, children }: SectionProps) {
   return (
-    <Box>
+    <Box width="full">
       <chakra.div id={id} height={0} mt={-16} pb={16}>
         &nbsp;
       </chakra.div>
