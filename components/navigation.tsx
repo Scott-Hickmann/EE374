@@ -13,7 +13,6 @@ import {
   useColorModeValue,
   useDisclosure
 } from '@chakra-ui/react';
-import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
 
 type NavLinkWrapperProps = React.PropsWithChildren<{
@@ -26,9 +25,9 @@ type NavLinkProps = React.PropsWithChildren<{
 }>;
 
 const routes = [
-  { title: 'Logistics', link: '#logistic' },
-  { title: 'Syllabus', link: '#syllabus' },
-  { title: 'Team', link: '#team' }
+  { title: 'Logistics', link: './#logistic' },
+  { title: 'Syllabus', link: './#syllabus' },
+  { title: 'Team', link: './#team' }
 ] as const;
 
 function NavLinkWrapper({
@@ -37,11 +36,7 @@ function NavLinkWrapper({
   children
 }: NavLinkWrapperProps): ReactElement {
   if (active) return <>{children}</>;
-  return (
-    <NextLink href={href} passHref>
-      {children}
-    </NextLink>
-  );
+  return <a href={href}>{children}</a>;
 }
 
 function NavLink({ href, children }: NavLinkProps): ReactElement {
@@ -122,9 +117,9 @@ export default function Navigation(): ReactElement {
                   </NavLink>
                 ))}
               </HStack>
-              <Button aria-label="Toggle color mode" onClick={toggleColorMode}>
+              {/* <Button aria-label="Toggle color mode" onClick={toggleColorMode}>
                 {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-              </Button>
+              </Button> */}
             </HStack>
           </Flex>
         </HStack>

@@ -106,25 +106,25 @@ export default function HomePage() {
           <TeachingTeamMember
             name="Dr. Dionysis Zindros"
             workRole="Instructor"
-            src="/images/dionysis.png"
+            src="./images/dionysis.png"
             alt="Dionysis Zindros"
           />
           <TeachingTeamMember
             name="Prof. David Tse"
             workRole="Instructor"
-            src="/images/david.png"
+            src="./images/david.png"
             alt="David Tse"
           />
           <TeachingTeamMember
             name="Scott Hickmann"
             workRole="Teaching Assistant"
-            src="/images/scott.png"
+            src="./images/scott.png"
             alt="Scott Hickmann"
           />
           <TeachingTeamMember
             name="Kenan Hasanaliyev"
             workRole="Teaching Assistant"
-            src="/images/kenan.png"
+            src="./images/kenan.png"
             alt="Dionysis Zindros"
           />
         </SimpleGrid>
