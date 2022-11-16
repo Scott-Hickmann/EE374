@@ -1,4 +1,5 @@
-import { Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export default function TitleSection() {
   return (
@@ -13,6 +14,14 @@ export default function TitleSection() {
       borderBottomWidth={2}
       borderBottomColor={useColorModeValue('gray.200', 'gray.900')}
     >
+      <Box w="full" h={200} position="relative">
+        <Image
+          src="/images/birds.png"
+          alt="Birds"
+          fill
+          style={{ objectFit: 'contain' }}
+        />
+      </Box>
       <Heading
         fontWeight={600}
         fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
