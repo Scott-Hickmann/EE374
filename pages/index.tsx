@@ -1,4 +1,4 @@
-import { chakra, Link, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
+import { Link, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
 
 import Layout from '../components/layout';
 import {
@@ -12,26 +12,257 @@ import {
 } from '../components/section';
 import TitleSection from '../components/titleSection';
 
-const syllabus = [
-  <>Administrivia, money, network/adversarial model, gossip</>,
-  <>Commitments, hashes, public/private keys, signatures, transactions, UTXO</>,
-  <>
-    Blocks, chains, proof-of-work, longest chain, mempool, blockchain properties
-  </>,
-  <>Rewards, fees, censorship, selfish mining, macroeconomics, pools</>,
-  <>Wallets, accounts, balances, nonces, transition functions</>,
-  <>
-    <chakra.span fontWeight="bold">Midterm.</chakra.span> Light clients, merkle
-    trees, authenticated data structures, SPV
-  </>,
-  <>Chain growth, chain quality, common prefix, synchrony, rounds</>,
-  <>Proofs of blockchain properties. Proof-of-stake. Longest chain vs BFT.</>,
-  <>BFT protocols, fast confirmation, finality, accountability.</>,
-  <>
-    Availability-finality dilemma, Ethereum 2.0. Finality and accountability
-    gadgets.
-  </>
-] as const;
+interface SyllabusItem {
+  title: string;
+  content: (JSX.Element | string)[];
+}
+
+const syllabus: SyllabusItem[] = [
+  {
+    title: 'Money',
+    content: [
+      'Administrivia',
+      'Money as a social construct',
+      'The network model',
+      'The non-eclipsing assumption',
+      'The gossip protocol'
+    ]
+  },
+  {
+    title: 'The Adversary',
+    content: [
+      'The adversary A',
+      'The security parameter κ',
+      'The honest protocol Π',
+      'The adversarial model',
+      'Probabilistic polynomial-time adversaries',
+      'Negligible functions',
+      'Game-based security',
+      'Security proofs by computation reduction',
+      'Proofs by contradiction and forward proofs'
+    ]
+  },
+  {
+    title: 'Primitives',
+    content: [
+      'The hash function: H',
+      'Preimage resistance, second preimage resistance, collision resistance',
+      'Collision resistance implies preimage resistance',
+      'Preimage resistance implies second preimage resistance',
+      'Public/private keys',
+      'Signature schemes',
+      'Signature correctness',
+      'Existential unforgeability',
+      'Ledgers'
+    ]
+  },
+  {
+    title: 'Transactions',
+    content: [
+      'Transactions',
+      'Inputs and outputs',
+      'The transaction graph',
+      'Change',
+      'Multiple inputs',
+      'Multiple outputs',
+      'The UTXO model',
+      'The law of conservation',
+      'Verifying a transaction'
+    ]
+  },
+  {
+    title: 'Blocks',
+    content: [
+      'Views in disagreement',
+      'Double spending',
+      'The network delay Δ',
+      "Simple ideas don't work!",
+      'Rare events',
+      'Blocks',
+      'Proof-of-work',
+      'The mining target T',
+      'The proof-of-work equation',
+      'The mining algorithm',
+      'Block freshness',
+      'The genesis block G',
+      'Chains'
+    ]
+  },
+  {
+    title: 'Chains',
+    content: [
+      'Hash chains',
+      'The number n of parties',
+      'The number t of adversarial parties',
+      'The hashing power q',
+      'Rare events are irregular',
+      'Convergence opportunities and periods of silence',
+      'The honest majority assumption',
+      'The longest chain rule',
+      'Coinbase',
+      'Fees',
+      'Mempools'
+    ]
+  },
+  {
+    title: 'Chain Virtues',
+    content: [
+      'Temporary forks',
+      'Convergence',
+      'The Nakamoto race',
+      'Chain Growth, Common Prefix, Chain Quality',
+      'Censorship',
+      'Majority attacks'
+    ]
+  },
+  {
+    title: 'Attacks',
+    content: [
+      'Healing',
+      'Macroeconomic supply',
+      'Selfish mining',
+      'Mining pools'
+    ]
+  },
+  {
+    title: 'Variable Difficulty, Pools, Wallets',
+    content: [
+      'CPU, GPU, ASIC mining',
+      'Incentive compatibility',
+      'Block size limits',
+      'Transaction prioritization by fees',
+      'Macroeconomic policy, reward adjustment',
+      'The difficulty adjustment equation Τ_{j+1} = T_{j} (t_2 - t_1) / (mη)',
+      'Mining pools, the light PoW equation: H(B) ≤ 2^z T',
+      'The pooled mining protocol',
+      'Cold, hot, and hardware wallets',
+      'Wallet seeds, deterministic wallets'
+    ]
+  },
+  {
+    title: 'Accounts and Balances, Merkle Trees',
+    content: [
+      'The account model',
+      'Transactions in the account model',
+      'Balances',
+      'Nonces',
+      'The generic transition function δ',
+      'Blockchain as a State Machine Replication mechanism',
+      'UTXO vs accounts',
+      'The file storage problem',
+      'The Merkle Tree: compress, prove, verify',
+      'Proofs of inclusion, succinctness',
+      'Merkle Tree security proof by reduction from collision-resistant hashes'
+    ]
+  },
+  {
+    title: 'Light Clients, Backbone Warmup',
+    content: [
+      'The problem of scalability in blockchains: Scaling computation, communication, and storage',
+      'From x-bar to x using Merkle Trees',
+      'The Simple Payment Verification (SPV) protocol',
+      'The header chain',
+      'Miners, Full Nodes, Light Nodes',
+      'Chain virtues for light nodes',
+      'Privacy concerns for light nodes',
+      'Random Oracles, formally',
+      'The synchrony assumption Δ = 1'
+    ]
+  },
+  {
+    title: 'Security in Earnest (I)',
+    content: [
+      'The Environment and the Execution',
+      'The Rushing Adversary',
+      'The Sybil Adversary',
+      'The Network model, the gossiping model',
+      'The Non-Eclipsing Assumption',
+      'The honest backbone protocol',
+      'Maintaining, adopting, and having chains',
+      'Proof-of-work',
+      'The q-bounded Random Oracle',
+      'The Static Difficulty assumption',
+      'Chain validation; the δ* function',
+      'Successful rounds',
+      'Convergence opportunities',
+      'Formal definition of Chain Virtues',
+      'Common Prefix, the parameter k',
+      'Chain Quality, the parameters μ and ℓ',
+      'Chain Growth, the parameters τ and s',
+      'The formal honest majority assumption: t < (1 - δ)(n - t)',
+      'The honest advantage δ',
+      'Convergence Opportunities are useful: The Pairing Lemma and its proof'
+    ]
+  },
+  {
+    title: 'Security in Earnest (II)',
+    content: [
+      'Ledger Safety and Liveness, formally. The liveness parameter u.',
+      'Proof of Safety from Common Prefix',
+      'Proof of Liveness from Chain Quality and Chain Growth; u = max((ℓ + k) / τ, s)',
+      'The Chain Growth Lemma and its proof',
+      'The successful round indicator X',
+      'The convergence opportunity indicator Y',
+      'The adversarial success indicator Z',
+      'The expectations of X, Y, and Z',
+      "Bernoulli's inequality",
+      'Lower and upper bounds on the expectation of X',
+      'Lower bounds on the expectation of Y',
+      'Good things converge: The Chernoff bound',
+      'The world is good, usually: Typical executions',
+      'The Chernoff duration λ',
+      'The Chernoff error ε',
+      'Proof of Typicality Theorem',
+      'The Balancing Equation: 3ε + 3f ≤ δ',
+      'A plot of X, Y, and Z with 3f, 3ε and δ'
+    ]
+  },
+  {
+    title: 'Security in Earnest (III)',
+    content: [
+      'Reminder of bounds on the expectations of X and Y',
+      'Upper bound on the expectation of Z',
+      'Typical bounds, and proof that Z ≤ Y',
+      'Chains grow: The Chain Growth theorem and its proof',
+      'The Patience Lemma and its proof',
+      'The Common Prefix theorem and its proof',
+      'Discussion on the relationship between ε and λ',
+      "You can't have it all: Discussion on the parametrization options for ε, f, δ"
+    ]
+  },
+  {
+    title: 'Longest Chain Proof of Stake (I)',
+    content: [
+      "Proof of Work's perils and environmental impact",
+      'Proof of Work vs Proof of Stake',
+      'Dangers of Proof of Stake',
+      'The Proof of Stake equation'
+    ]
+  },
+  {
+    title: 'Longest Chain Proof of Stake (II)',
+    content: [
+      "Proof of Work's perils and environmental impact",
+      'Proof of Work vs Proof of Stake',
+      'Dangers of Proof of Stake',
+      'The Proof of Stake equation'
+    ]
+  },
+  {
+    title: 'BFT Proof of Stake (I)',
+    content: [
+      'Everything is a Race and Nakamoto Always Wins',
+      'Verifiable Random Functions',
+      'VRF correctness',
+      'The unpredictability game',
+      'Towards instant finality'
+    ]
+  },
+  {
+    title: 'BFT Proof of Stake (II)',
+    content: ['The Streamlet protocol and its proof of safety']
+  }
+];
 
 export default function HomePage() {
   const section1SubsectionTitleColor = 'gray.400';
@@ -86,12 +317,14 @@ export default function HomePage() {
       </Sections>
       <Section id="syllabus" bg={useColorModeValue('gray.200', 'gray.700')}>
         <SectionTitle>Syllabus</SectionTitle>
-        {syllabus.map((content, index) => (
+        {syllabus.map(({ title, content }, index) => (
           <Subsection key={index}>
             <SubsectionTitle color={section2SubsectionTitleColor}>
-              Week {index + 1}
+              Lecture {index + 1}: {title}
             </SubsectionTitle>
-            <SubectionText>{content}</SubectionText>
+            {content.map((item, index) => (
+              <SubectionText key={index}>{item}</SubectionText>
+            ))}
           </Subsection>
         ))}
       </Section>
