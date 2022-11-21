@@ -1,4 +1,13 @@
-import { Link, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Link,
+  SimpleGrid,
+  useColorModeValue
+} from '@chakra-ui/react';
 
 import Layout from '../components/layout';
 import {
@@ -19,7 +28,7 @@ interface SyllabusItem {
 
 const syllabus: SyllabusItem[] = [
   {
-    title: 'Money',
+    title: 'Lecture 1: Money',
     content: [
       'Administrivia',
       'Money as a social construct',
@@ -29,7 +38,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'The Adversary',
+    title: 'Lecture 2: The Adversary',
     content: [
       'The adversary A',
       'The security parameter κ',
@@ -43,7 +52,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Primitives',
+    title: 'Lecture 3: Primitives',
     content: [
       'The hash function: H',
       'Preimage resistance, second preimage resistance, collision resistance',
@@ -57,7 +66,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Transactions',
+    title: 'Lecture 4: Transactions',
     content: [
       'Transactions',
       'Inputs and outputs',
@@ -71,7 +80,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Blocks',
+    title: 'Lecture 5: Blocks',
     content: [
       'Views in disagreement',
       'Double spending',
@@ -89,7 +98,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Chains',
+    title: 'Lecture 6: Chains',
     content: [
       'Hash chains',
       'The number n of parties',
@@ -105,7 +114,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Chain Virtues',
+    title: 'Lecture 7: Chain Virtues',
     content: [
       'Temporary forks',
       'Convergence',
@@ -116,7 +125,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Attacks',
+    title: 'Lecture 8: Attacks',
     content: [
       'Healing',
       'Macroeconomic supply',
@@ -125,7 +134,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Variable Difficulty, Pools, Wallets',
+    title: 'Lecture 9: Variable Difficulty, Pools, Wallets',
     content: [
       'CPU, GPU, ASIC mining',
       'Incentive compatibility',
@@ -140,7 +149,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Accounts and Balances, Merkle Trees',
+    title: 'Lecture 10: Accounts and Balances, Merkle Trees',
     content: [
       'The account model',
       'Transactions in the account model',
@@ -156,7 +165,11 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Light Clients, Backbone Warmup',
+    title: 'Midterm Exam',
+    content: ['More information will be posted soon.']
+  },
+  {
+    title: 'Lecture 11: Light Clients, Backbone Warmup',
     content: [
       'The problem of scalability in blockchains: Scaling computation, communication, and storage',
       'From x-bar to x using Merkle Trees',
@@ -170,7 +183,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Security in Earnest (I)',
+    title: 'Lecture 12: Security in Earnest (I)',
     content: [
       'The Environment and the Execution',
       'The Rushing Adversary',
@@ -195,7 +208,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Security in Earnest (II)',
+    title: 'Lecture 13: Security in Earnest (II)',
     content: [
       'Ledger Safety and Liveness, formally. The liveness parameter u.',
       'Proof of Safety from Common Prefix',
@@ -218,7 +231,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Security in Earnest (III)',
+    title: 'Lecture 14: Security in Earnest (III)',
     content: [
       'Reminder of bounds on the expectations of X and Y',
       'Upper bound on the expectation of Z',
@@ -231,7 +244,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Longest Chain Proof of Stake (I)',
+    title: 'Lecture 15: Longest Chain Proof of Stake (I)',
     content: [
       "Proof of Work's perils and environmental impact",
       'Proof of Work vs Proof of Stake',
@@ -240,7 +253,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'Longest Chain Proof of Stake (II)',
+    title: 'Lecture 16: Longest Chain Proof of Stake (II)',
     content: [
       "Proof of Work's perils and environmental impact",
       'Proof of Work vs Proof of Stake',
@@ -249,7 +262,7 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'BFT Proof of Stake (I)',
+    title: 'Lecture 17: BFT Proof of Stake (I)',
     content: [
       'Everything is a Race and Nakamoto Always Wins',
       'Verifiable Random Functions',
@@ -259,8 +272,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
-    title: 'BFT Proof of Stake (II)',
+    title: 'Lecture 18: BFT Proof of Stake (II)',
     content: ['The Streamlet protocol and its proof of safety']
+  },
+  {
+    title: 'Final Exam',
+    content: ['More information will be posted soon.']
   }
 ];
 
@@ -282,7 +299,7 @@ export default function HomePage() {
               Meeting Times
             </SubsectionTitle>
             <SubectionText>
-              Tuesday, Thursday 1:30-2:50PM
+              Tuesday, Thursday 1:30-2:50 PM
               <br />
               Gates B12
             </SubectionText>
@@ -295,7 +312,9 @@ export default function HomePage() {
               Blockchains are a new field of computer science which combines
               cryptography, distributed systems, and security. In this course,
               we dive deep into the fundamentals: what are blockchains, how do
-              they work, and why are they secure?
+              they work, and why are they secure? <br />
+              While in the EE department, this course also counts as a CS
+              elective.
             </SubectionText>
           </Subsection>
           <Subsection>
@@ -319,12 +338,21 @@ export default function HomePage() {
         <SectionTitle>Syllabus</SectionTitle>
         {syllabus.map(({ title, content }, index) => (
           <Subsection key={index}>
-            <SubsectionTitle color={section2SubsectionTitleColor}>
-              Lecture {index + 1}: {title}
-            </SubsectionTitle>
-            {content.map((item, index) => (
-              <SubectionText key={index}>{item}</SubectionText>
-            ))}
+            <Accordion allowToggle>
+              <AccordionItem>
+                <AccordionButton borderRadius="md">
+                  <SubsectionTitle color={section2SubsectionTitleColor}>
+                    {title}
+                  </SubsectionTitle>
+                  <AccordionIcon color={section2SubsectionTitleColor} />
+                </AccordionButton>
+                <AccordionPanel>
+                  {content.map((item, index) => (
+                    <SubectionText key={index}>{item}</SubectionText>
+                  ))}
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           </Subsection>
         ))}
       </Section>
