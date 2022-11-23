@@ -319,6 +319,19 @@ export default function HomePage() {
           </Subsection>
           <Subsection>
             <SubsectionTitle color={section1SubsectionTitleColor}>
+              Prerequisites
+            </SubsectionTitle>
+            <SubectionText>
+              CS106A, CS106B, or CS106X, or relevant programming experience
+              <br />
+              CS103, or CS103B or related course on discrete math
+              <br />
+              CS109, MATH151, STATS116, or EE178 or related course on
+              probability
+            </SubectionText>
+          </Subsection>
+          <Subsection>
+            <SubsectionTitle color={section1SubsectionTitleColor}>
               Questions or Concerns?
             </SubsectionTitle>
             <SubectionText>
@@ -348,7 +361,7 @@ export default function HomePage() {
                 </AccordionButton>
                 <AccordionPanel>
                   {content.map((item, index) => (
-                    <SubectionText key={index}>{item}</SubectionText>
+                    <SubectionText key={index}>• {item}</SubectionText>
                   ))}
                 </AccordionPanel>
               </AccordionItem>
