@@ -4,6 +4,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
+  HStack,
   Link,
   SimpleGrid,
   useColorModeValue
@@ -17,18 +18,23 @@ import {
   SubectionText,
   Subsection,
   SubsectionTitle,
+  SubsectionTitleDate,
   TeachingTeamMember
 } from '../components/section';
 import TitleSection from '../components/titleSection';
+import { usDate, usTime } from '../utils/date';
 
 interface SyllabusItem {
   title: string;
+  date: Date;
   content: (JSX.Element | string)[];
+  type?: 'exam' | 'workshop';
 }
 
 const syllabus: SyllabusItem[] = [
   {
     title: 'Lecture 1: Money',
+    date: new Date(2023, 0, 10),
     content: [
       'Administrivia',
       'Money as a social construct',
@@ -38,7 +44,18 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Workshop 1: TypeScript',
+    date: new Date(2023, 0, 11, 16, 30),
+    content: [
+      'Setting up a TypeScript project',
+      'TypeScript basics',
+      'Building your project'
+    ],
+    type: 'workshop'
+  },
+  {
     title: 'Lecture 2: The Adversary',
+    date: new Date(2023, 0, 12),
     content: [
       'The adversary A',
       'The security parameter κ',
@@ -52,7 +69,18 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Workshop 2: Networking',
+    date: new Date(2023, 0, 13, 12, 0),
+    content: [
+      'TCP/IP socket connections',
+      'Establishing a connection',
+      'Receiving and parsing data'
+    ],
+    type: 'workshop'
+  },
+  {
     title: 'Lecture 3: Primitives',
+    date: new Date(2023, 0, 17),
     content: [
       'The hash function: H',
       'Preimage resistance, second preimage resistance, collision resistance',
@@ -67,6 +95,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 4: Transactions',
+    date: new Date(2023, 0, 19),
     content: [
       'Transactions',
       'Inputs and outputs',
@@ -80,7 +109,14 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Workshop 3: Promises and Events',
+    date: new Date(2023, 0, 20, 12, 0),
+    content: ['JavaScript promises', 'Async/await', 'Event emitters'],
+    type: 'workshop'
+  },
+  {
     title: 'Lecture 5: Blocks',
+    date: new Date(2023, 0, 24),
     content: [
       'Views in disagreement',
       'Double spending',
@@ -99,6 +135,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 6: Chains',
+    date: new Date(2023, 0, 26),
     content: [
       'Hash chains',
       'The number n of parties',
@@ -115,6 +152,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 7: Chain Virtues',
+    date: new Date(2023, 0, 31),
     content: [
       'Temporary forks',
       'Convergence',
@@ -126,6 +164,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 8: Attacks',
+    date: new Date(2023, 1, 2),
     content: [
       'Healing',
       'Macroeconomic supply',
@@ -135,6 +174,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 9: Variable Difficulty, Pools, Wallets',
+    date: new Date(2023, 1, 7),
     content: [
       'CPU, GPU, ASIC mining',
       'Incentive compatibility',
@@ -150,6 +190,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 10: Accounts and Balances, Merkle Trees',
+    date: new Date(2023, 1, 9),
     content: [
       'The account model',
       'Transactions in the account model',
@@ -166,10 +207,13 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Midterm Exam',
-    content: ['More information will be posted soon.']
+    date: new Date(2023, 1, 14),
+    content: ['More information will be posted soon.'],
+    type: 'exam'
   },
   {
     title: 'Lecture 11: Light Clients, Backbone Warmup',
+    date: new Date(2023, 1, 16),
     content: [
       'The problem of scalability in blockchains: Scaling computation, communication, and storage',
       'From x-bar to x using Merkle Trees',
@@ -184,6 +228,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 12: Security in Earnest (I)',
+    date: new Date(2023, 1, 21),
     content: [
       'The Environment and the Execution',
       'The Rushing Adversary',
@@ -209,6 +254,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 13: Security in Earnest (II)',
+    date: new Date(2023, 1, 23),
     content: [
       'Ledger Safety and Liveness, formally. The liveness parameter u.',
       'Proof of Safety from Common Prefix',
@@ -232,6 +278,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 14: Security in Earnest (III)',
+    date: new Date(2023, 1, 28),
     content: [
       'Reminder of bounds on the expectations of X and Y',
       'Upper bound on the expectation of Z',
@@ -245,6 +292,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 15: Longest Chain Proof of Stake (I)',
+    date: new Date(2023, 2, 2),
     content: [
       "Proof of Work's perils and environmental impact",
       'Proof of Work vs Proof of Stake',
@@ -254,6 +302,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 16: Longest Chain Proof of Stake (II)',
+    date: new Date(2023, 2, 7),
     content: [
       "Proof of Work's perils and environmental impact",
       'Proof of Work vs Proof of Stake',
@@ -263,6 +312,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 17: BFT Proof of Stake (I)',
+    date: new Date(2023, 2, 9),
     content: [
       'Everything is a Race and Nakamoto Always Wins',
       'Verifiable Random Functions',
@@ -273,17 +323,30 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Lecture 18: BFT Proof of Stake (II)',
+    date: new Date(2023, 2, 14),
     content: ['The Streamlet protocol and its proof of safety']
   },
   {
+    title: 'Lecture 19: Proof of Stake Conclusion',
+    date: new Date(2023, 2, 16),
+    content: ['Final lecture on proof of stake']
+  },
+  {
     title: 'Final Exam',
-    content: ['More information will be posted soon.']
+    date: new Date(2023, 2, 21),
+    content: ['More information will be posted soon.'],
+    type: 'exam'
   }
 ];
 
 export default function HomePage() {
   const section1SubsectionTitleColor = 'gray.400';
-  const section2SubsectionTitleColor = 'blue.400';
+  const primaryColor = 'blue.400';
+
+  const colors = {
+    exam: useColorModeValue('blue.600', 'blue.200'),
+    workshop: useColorModeValue('blue.300', 'blue.600')
+  } as const;
 
   return (
     <Layout
@@ -336,10 +399,7 @@ export default function HomePage() {
             </SubsectionTitle>
             <SubectionText>
               Please reach out to{' '}
-              <Link
-                color={section2SubsectionTitleColor}
-                href="mailto:dionyziz@stanford.edu"
-              >
+              <Link color={primaryColor} href="mailto:dionyziz@stanford.edu">
                 dionyziz@stanford.edu
               </Link>{' '}
               if you have any questions or concerns!
@@ -349,25 +409,32 @@ export default function HomePage() {
       </Sections>
       <Section id="syllabus" bg={useColorModeValue('gray.200', 'gray.700')}>
         <SectionTitle>Syllabus</SectionTitle>
-        {syllabus.map(({ title, content }, index) => (
-          <Subsection key={index}>
-            <Accordion allowToggle>
-              <AccordionItem>
-                <AccordionButton borderRadius="md">
-                  <SubsectionTitle color={section2SubsectionTitleColor}>
-                    {title}
-                  </SubsectionTitle>
-                  <AccordionIcon color={section2SubsectionTitleColor} />
-                </AccordionButton>
-                <AccordionPanel>
-                  {content.map((item, index) => (
-                    <SubectionText key={index}>• {item}</SubectionText>
-                  ))}
-                </AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </Subsection>
-        ))}
+        {syllabus.map(({ title, date, content, type }, index) => {
+          const color = type ? colors[type] : primaryColor;
+          return (
+            <Subsection key={index}>
+              <Accordion allowToggle>
+                <AccordionItem border="none">
+                  <AccordionButton borderRadius="md">
+                    <HStack spacing={4}>
+                      <SubsectionTitle color={color}>{title}</SubsectionTitle>
+                      <SubsectionTitleDate>
+                        {usDate(date)}
+                        {date.getHours() !== 0 ? ` (${usTime(date)})` : ''}
+                      </SubsectionTitleDate>
+                    </HStack>
+                    <AccordionIcon />
+                  </AccordionButton>
+                  <AccordionPanel>
+                    {content.map((item, index) => (
+                      <SubectionText key={index}>• {item}</SubectionText>
+                    ))}
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </Subsection>
+          );
+        })}
       </Section>
       <Section id="team" bg="blue.500" color="white">
         <SectionTitle>Teaching Team</SectionTitle>

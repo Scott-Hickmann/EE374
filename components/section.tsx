@@ -57,6 +57,14 @@ export function SubsectionTitle({ color, children }: SubsectionTitleProps) {
   );
 }
 
+export function SubsectionTitleDate({ children }: SubsectionTextProps) {
+  return (
+    <Text fontSize="xl" fontWeight="bold">
+      {children}
+    </Text>
+  );
+}
+
 export function SubectionText({ children }: SubsectionTextProps) {
   return <Text>{children}</Text>;
 }
