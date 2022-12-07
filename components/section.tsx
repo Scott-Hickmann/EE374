@@ -91,8 +91,8 @@ export function TeachingTeamMember({
       <Image
         src={src}
         alt={alt}
-        width={250}
-        height={250}
+        width={160}
+        height={160}
         style={{ borderRadius: 25 }}
       />
       <VStack spacing={0}>
