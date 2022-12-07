@@ -41,7 +41,7 @@ export function Section({ id, bg, color, children }: SectionProps) {
       <chakra.div id={id} height={0} mt={-16} pb={16}>
         &nbsp;
       </chakra.div>
-      <VStack bg={bg} color={color} p={{ base: 8, md: 10 }} spacing={6}>
+      <VStack bg={bg} color={color} p={{ base: 6, sm: 8, md: 10 }} spacing={6}>
         {children}
       </VStack>
     </Box>
@@ -98,7 +98,9 @@ export function TeachingTeamMember({
       <VStack spacing={0}>
         <Text>{name}</Text>
         <Text fontStyle="italic">{workRole}</Text>
-        <Link href={`mailto:${email}`}>{email}</Link>
+        <Link href={`mailto:${email}`} fontSize={{ base: 'sm', md: 'md' }}>
+          {email}
+        </Link>
         <Stack
           direction={{ base: 'column', md: 'row' }}
           align={{ base: 'stretch', md: 'start' }}

@@ -450,7 +450,7 @@ export default function HomePage() {
           width="full"
           justifyItems="center"
           columns={2}
-          spacing={{ base: 8, md: 10 }}
+          spacing={{ sm: 8, md: 10 }}
         >
           <TeachingTeamMember
             name="Dr. Dionysis Zindros"
