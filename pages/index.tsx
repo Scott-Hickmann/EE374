@@ -416,9 +416,11 @@ export default function HomePage() {
               <Accordion allowToggle>
                 <AccordionItem border="none">
                   <AccordionButton borderRadius="md">
-                    <HStack spacing={4}>
+                    <HStack spacing={4} textAlign="start">
                       <SubsectionTitle color={color}>{title}</SubsectionTitle>
-                      <SubsectionTitleDate>
+                      <SubsectionTitleDate
+                        display={{ base: 'none', lg: 'initial' }}
+                      >
                         {usDate(date)}
                         {date.getHours() !== 0 ? ` (${usTime(date)})` : ''}
                       </SubsectionTitleDate>
@@ -426,6 +428,12 @@ export default function HomePage() {
                     <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel>
+                    <SubsectionTitleDate
+                      display={{ base: 'initial', lg: 'none' }}
+                    >
+                      {usDate(date)}
+                      {date.getHours() !== 0 ? ` (${usTime(date)})` : ''}
+                    </SubsectionTitleDate>
                     {content.map((item, index) => (
                       <SubectionText key={index}>• {item}</SubectionText>
                     ))}
@@ -447,24 +455,38 @@ export default function HomePage() {
           <TeachingTeamMember
             name="Dr. Dionysis Zindros"
             workRole="Instructor"
+            email="dionyziz@stanford.edu"
+            officeHoursDate={
+              <>
+                Tue 3:00pm - 4:00pm
+                <br />
+                Wed 10:00am - 11:00am
+              </>
+            }
             src="/images/dionysis.png"
             alt="Dionysis Zindros"
           />
           <TeachingTeamMember
             name="Prof. David Tse"
             workRole="Instructor"
+            email="dntse@stanford.edu"
+            officeHoursDate="Upon email request"
             src="/images/david.png"
             alt="David Tse"
           />
           <TeachingTeamMember
             name="Scott Hickmann"
             workRole="Teaching Assistant"
+            email="hickmann@stanford.edu"
+            officeHoursDate="Wed 4:30pm - 5:30pm"
             src="/images/scott.png"
             alt="Scott Hickmann"
           />
           <TeachingTeamMember
             name="Kenan Hasanaliyev"
             workRole="Teaching Assistant"
+            email="kenanhas@stanford.edu"
+            officeHoursDate="Mon 5:30pm - 6:30pm"
             src="/images/kenan.png"
             alt="Dionysis Zindros"
           />

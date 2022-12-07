@@ -3,11 +3,13 @@ export function padDatePart(part: number): string {
 }
 
 export function usDate(date: Date): string {
-  return date.toLocaleString('en-US', {
-    weekday: 'long',
-    month: 'numeric',
-    day: 'numeric'
-  });
+  return date
+    .toLocaleString('en-US', {
+      weekday: 'long',
+      month: 'numeric',
+      day: 'numeric'
+    })
+    .replace(/,/g, '');
 }
 
 export function usTime(date: Date): string {

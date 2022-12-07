@@ -1,4 +1,13 @@
-import { Box, chakra, Heading, Stack, Text, VStack } from '@chakra-ui/react';
+import {
+  Box,
+  chakra,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  TextProps,
+  VStack
+} from '@chakra-ui/react';
 import Image from 'next/image';
 
 export type SectionsProps = React.PropsWithChildren<unknown>;
@@ -16,6 +25,8 @@ export type SubsectionTextProps = React.PropsWithChildren<unknown>;
 export interface TeachingTeamMemberProps {
   name: string;
   workRole: string;
+  email: string;
+  officeHoursDate: string | JSX.Element;
   src: string;
   alt: string;
 }
@@ -51,17 +62,15 @@ export function SectionTitle({ children }: SectionTitleProps) {
 
 export function SubsectionTitle({ color, children }: SubsectionTitleProps) {
   return (
-    <Heading fontSize="3xl" color={color}>
+    <Heading fontSize={{ base: '2xl', md: '3xl' }} color={color}>
       {children}
     </Heading>
   );
 }
 
-export function SubsectionTitleDate({ children }: SubsectionTextProps) {
+export function SubsectionTitleDate(props: TextProps) {
   return (
-    <Text fontSize="xl" fontWeight="bold">
-      {children}
-    </Text>
+    <Text fontSize={{ base: 'lg', md: 'xl' }} fontWeight="bold" {...props} />
   );
 }
 
@@ -72,6 +81,8 @@ export function SubectionText({ children }: SubsectionTextProps) {
 export function TeachingTeamMember({
   name,
   workRole,
+  email,
+  officeHoursDate,
   src,
   alt
 }: TeachingTeamMemberProps) {
@@ -87,6 +98,18 @@ export function TeachingTeamMember({
       <VStack spacing={0}>
         <Text>{name}</Text>
         <Text fontStyle="italic">{workRole}</Text>
+        <Link href={`mailto:${email}`}>{email}</Link>
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          align={{ base: 'stretch', md: 'start' }}
+          justify="start"
+          textAlign={{ base: 'center', md: 'start' }}
+          spacing={0}
+          fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}
+        >
+          <Text>Office Hours:&nbsp;</Text>
+          <Text>{officeHoursDate}</Text>
+        </Stack>
       </VStack>
     </VStack>
   );
