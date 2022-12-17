@@ -70,7 +70,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Workshop 2: Networking',
-    date: new Date(2023, 0, 13, 12, 0),
+    date: new Date(2023, 0, 13, 12, 30),
     content: [
       'TCP/IP socket connections',
       'Establishing a connection',
@@ -110,7 +110,7 @@ const syllabus: SyllabusItem[] = [
   },
   {
     title: 'Workshop 3: Promises and Events',
-    date: new Date(2023, 0, 20, 12, 0),
+    date: new Date(2023, 0, 20, 12, 30),
     content: ['JavaScript promises', 'Async/await', 'Event emitters'],
     type: 'workshop'
   },
