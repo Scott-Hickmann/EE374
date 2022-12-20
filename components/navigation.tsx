@@ -18,7 +18,7 @@ import React, { ReactElement } from 'react';
 
 type NavLinkWrapperProps = React.PropsWithChildren<{
   href: string;
-  active: boolean;
+  active?: boolean;
 }>;
 
 type NavLinkProps = React.PropsWithChildren<{
@@ -26,9 +26,10 @@ type NavLinkProps = React.PropsWithChildren<{
 }>;
 
 const routes = [
-  { title: 'Logistics', link: '#logistic' },
-  { title: 'Syllabus', link: '#syllabus' },
-  { title: 'Team', link: '#team' }
+  { title: 'Logistics', link: '/#logistic' },
+  { title: 'Syllabus', link: '/#syllabus' },
+  { title: 'Team', link: '/#team' },
+  { title: 'Protocol', link: '/protocol' }
 ] as const;
 
 function NavLinkWrapper({
@@ -87,7 +88,7 @@ export default function Navigation(): ReactElement {
         <IconButton
           size={'md'}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label={'Open Menu'}
+          aria-label="Open Menu"
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
@@ -97,17 +98,19 @@ export default function Navigation(): ReactElement {
           justify="space-between"
           width="full"
         >
-          <Text
-            fontWeight={600}
-            whiteSpace="nowrap"
-            fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
-          >
-            <chakra.span color={'blue.400'}>EE374:</chakra.span> Blockchain
-            Foundations{' '}
-            <chakra.span display={{ base: 'none', md: 'inline' }}>
-              (Winter 2023)
-            </chakra.span>
-          </Text>
+          <NavLinkWrapper href="/">
+            <Text
+              fontWeight={600}
+              whiteSpace="nowrap"
+              fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
+            >
+              <chakra.span color={'blue.400'}>EE374:</chakra.span> Blockchain
+              Foundations{' '}
+              <chakra.span display={{ base: 'none', md: 'inline' }}>
+                (Winter 2023)
+              </chakra.span>
+            </Text>
+          </NavLinkWrapper>
           <Flex alignItems="center" fontSize={{ base: 'sm', md: 'md' }}>
             <HStack spacing={{ base: 2, lg: 4 }}>
               <HStack

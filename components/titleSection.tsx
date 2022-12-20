@@ -1,7 +1,11 @@
 import { Box, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import Image from 'next/image';
 
-export default function TitleSection() {
+export interface TitleSectionProps {
+  title?: string;
+}
+
+export default function TitleSection({ title }: TitleSectionProps) {
   return (
     <Stack
       width="full"
@@ -27,10 +31,16 @@ export default function TitleSection() {
         fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
         lineHeight={'110%'}
       >
-        <Text as={'span'} color={'blue.400'}>
-          EE374:
-        </Text>{' '}
-        Blockchain Foundations
+        {title ? (
+          title
+        ) : (
+          <>
+            <Text as={'span'} color={'blue.400'}>
+              EE374:
+            </Text>{' '}
+            Blockchain Foundations
+          </>
+        )}
       </Heading>
     </Stack>
   );

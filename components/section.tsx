@@ -20,6 +20,7 @@ export type SubsectionProps = React.PropsWithChildren<unknown>;
 export type SectionTitleProps = React.PropsWithChildren<unknown>;
 export type SubsectionTitleProps = React.PropsWithChildren<{
   color?: string;
+  isMarkdown?: boolean;
 }>;
 export type SubsectionTextProps = React.PropsWithChildren<unknown>;
 export interface TeachingTeamMemberProps {
@@ -60,9 +61,49 @@ export function SectionTitle({ children }: SectionTitleProps) {
   return <Heading fontSize="4xl">{children}</Heading>;
 }
 
-export function SubsectionTitle({ color, children }: SubsectionTitleProps) {
+export function SubsectionTitle({
+  color,
+  children,
+  isMarkdown
+}: SubsectionTitleProps) {
   return (
-    <Heading fontSize={{ base: '2xl', md: '3xl' }} color={color}>
+    <Heading
+      as="h3"
+      fontSize={{ base: '2xl', md: '3xl' }}
+      color={color}
+      css={
+        isMarkdown && {
+          paddingTop: 24,
+          ':first-child': {
+            paddingTop: 0
+          }
+        }
+      }
+    >
+      {children}
+    </Heading>
+  );
+}
+
+export function SubsubsectionTitle({
+  color,
+  children,
+  isMarkdown
+}: SubsectionTitleProps) {
+  return (
+    <Heading
+      as="h4"
+      fontSize={{ base: 'xl', md: '2xl' }}
+      color={color}
+      css={
+        isMarkdown && {
+          paddingTop: 12,
+          ':first-child': {
+            paddingTop: 0
+          }
+        }
+      }
+    >
       {children}
     </Heading>
   );
