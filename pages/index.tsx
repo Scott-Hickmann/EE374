@@ -28,8 +28,13 @@ interface SyllabusItem {
   title: string;
   date: Date;
   content: (JSX.Element | string)[];
-  type?: 'exam' | 'workshop';
+  type?: 'psetSoft' | 'psetHard' | 'exam' | 'workshop';
 }
+
+const softGradingDeadlineMessage =
+  'The grader will test your node for you to get feedback. This is not graded.';
+const hardGradingDeadlineMessage =
+  'The grader will test your node and give you a grade.';
 
 const syllabus: SyllabusItem[] = [
   {
@@ -79,6 +84,12 @@ const syllabus: SyllabusItem[] = [
     type: 'workshop'
   },
   {
+    title: 'Problem Set 1 Soft Deadline',
+    date: new Date(2023, 0, 17, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 3: Primitives',
     date: new Date(2023, 0, 17),
     content: [
@@ -92,6 +103,12 @@ const syllabus: SyllabusItem[] = [
       'Existential unforgeability',
       'Ledgers'
     ]
+  },
+  {
+    title: 'Problem Set 1 Hard Deadline',
+    date: new Date(2023, 0, 19, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
   },
   {
     title: 'Lecture 4: Transactions',
@@ -115,6 +132,12 @@ const syllabus: SyllabusItem[] = [
     type: 'workshop'
   },
   {
+    title: 'Problem Set 2 Soft Deadline',
+    date: new Date(2023, 0, 24, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 5: Blocks',
     date: new Date(2023, 0, 24),
     content: [
@@ -134,6 +157,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 2 Hard Deadline',
+    date: new Date(2023, 0, 26, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
+  },
+  {
     title: 'Lecture 6: Chains',
     date: new Date(2023, 0, 26),
     content: [
@@ -151,6 +180,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 3 Soft Deadline',
+    date: new Date(2023, 0, 31, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 7: Chain Virtues',
     date: new Date(2023, 0, 31),
     content: [
@@ -161,6 +196,12 @@ const syllabus: SyllabusItem[] = [
       'Censorship',
       'Majority attacks'
     ]
+  },
+  {
+    title: 'Problem Set 3 Hard Deadline',
+    date: new Date(2023, 1, 2, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
   },
   {
     title: 'Lecture 8: Attacks',
@@ -227,6 +268,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 4 Soft Deadline',
+    date: new Date(2023, 1, 21, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 12: Security in Earnest (I)',
     date: new Date(2023, 1, 21),
     content: [
@@ -253,6 +300,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 4 Hard Deadline',
+    date: new Date(2023, 1, 23, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
+  },
+  {
     title: 'Lecture 13: Security in Earnest (II)',
     date: new Date(2023, 1, 23),
     content: [
@@ -277,6 +330,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 5 Soft Deadline',
+    date: new Date(2023, 1, 28, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 14: Security in Earnest (III)',
     date: new Date(2023, 1, 28),
     content: [
@@ -291,6 +350,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 5 Hard Deadline',
+    date: new Date(2023, 2, 2, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
+  },
+  {
     title: 'Lecture 15: Longest Chain Proof of Stake (I)',
     date: new Date(2023, 2, 2),
     content: [
@@ -301,6 +366,12 @@ const syllabus: SyllabusItem[] = [
     ]
   },
   {
+    title: 'Problem Set 6 Soft Deadline',
+    date: new Date(2023, 2, 7, 13, 30),
+    content: [softGradingDeadlineMessage],
+    type: 'psetSoft'
+  },
+  {
     title: 'Lecture 16: Longest Chain Proof of Stake (II)',
     date: new Date(2023, 2, 7),
     content: [
@@ -309,6 +380,12 @@ const syllabus: SyllabusItem[] = [
       'Dangers of Proof of Stake',
       'The Proof of Stake equation'
     ]
+  },
+  {
+    title: 'Problem Set 6 Hard Deadline',
+    date: new Date(2023, 2, 9, 13, 30),
+    content: [hardGradingDeadlineMessage],
+    type: 'psetHard'
   },
   {
     title: 'Lecture 17: BFT Proof of Stake (I)',
@@ -344,8 +421,10 @@ export default function HomePage() {
   const primaryColor = 'blue.400';
 
   const colors = {
-    exam: useColorModeValue('blue.600', 'blue.200'),
-    workshop: useColorModeValue('blue.300', 'blue.600')
+    psetSoft: 'orange.400',
+    psetHard: 'red.400',
+    exam: 'green.500',
+    workshop: 'purple.400'
   } as const;
 
   return (
@@ -376,6 +455,13 @@ export default function HomePage() {
               cryptography, distributed systems, and security. In this course,
               we dive deep into the fundamentals: what are blockchains, how do
               they work, and why are they secure? <br />
+              You will learn both the theory behind blockchains and how to
+              implement them in practice. The lectures, as well as the midterm
+              and final, will dive deep into the robust construction of
+              proof-of-work and proof-of-stake blockchains. The problem sets
+              will focus on the implementation of a blockchain node from
+              scratch.
+              <br />
               While in the EE department, this course also counts as a CS
               elective.
             </SubectionText>
