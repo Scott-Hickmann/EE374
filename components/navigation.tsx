@@ -106,7 +106,7 @@ export default function Navigation(): ReactElement {
             >
               <chakra.span color={'blue.400'}>EE374:</chakra.span> Blockchain
               Foundations{' '}
-              <chakra.span display={{ base: 'none', md: 'inline' }}>
+              <chakra.span display={{ base: 'none', lg: 'inline' }}>
                 (Winter 2023)
               </chakra.span>
             </Text>

@@ -568,7 +568,14 @@ export default function HomePage() {
                     <Subsection key={index}>
                       <Accordion allowToggle>
                         <AccordionItem border="none">
-                          <AccordionButton borderRadius="md" p={2}>
+                          <AccordionButton
+                            borderRadius="md"
+                            p={2}
+                            justifyContent={{
+                              base: 'space-between',
+                              md: 'start'
+                            }}
+                          >
                             <HStack spacing={4} textAlign="start">
                               <SubsubsectionTitle color={color}>
                                 {title}
