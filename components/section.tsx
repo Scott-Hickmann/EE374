@@ -28,6 +28,7 @@ export interface TeachingTeamMemberProps {
   workRole: string;
   email: string;
   officeHoursDate: string | JSX.Element;
+  officeHoursLocation?: string;
   src: string;
   alt: string;
 }
@@ -115,6 +116,12 @@ export function SubsectionTitleDate(props: TextProps) {
   );
 }
 
+export function SubsectionLocation(props: TextProps) {
+  return (
+    <Text fontSize={{ base: 'lg', md: 'xl' }} fontWeight="bold" {...props} />
+  );
+}
+
 export function SubectionText({ children }: SubsectionTextProps) {
   return <Text>{children}</Text>;
 }
@@ -124,6 +131,7 @@ export function TeachingTeamMember({
   workRole,
   email,
   officeHoursDate,
+  officeHoursLocation,
   src,
   alt
 }: TeachingTeamMemberProps) {
@@ -153,6 +161,11 @@ export function TeachingTeamMember({
           <Text>Office Hours:&nbsp;</Text>
           <Text>{officeHoursDate}</Text>
         </Stack>
+        {officeHoursLocation && (
+          <Text fontSize={{ base: 'xs', sm: 'sm', md: 'md' }}>
+            Location: {officeHoursLocation}
+          </Text>
+        )}
       </VStack>
     </VStack>
   );

@@ -18,6 +18,7 @@ import {
   SectionTitle,
   SubectionText,
   Subsection,
+  SubsectionLocation,
   SubsectionTitle,
   SubsectionTitleDate,
   SubsubsectionTitle,
@@ -29,6 +30,7 @@ import { usDate, usTime } from '../utils/date';
 interface SyllabusItem {
   title: string;
   date: Date;
+  location?: string;
   content: (JSX.Element | string)[];
   type?: 'psetSoft' | 'psetHard' | 'exam' | 'workshop';
 }
@@ -61,6 +63,7 @@ const syllabus: SyllabusWeek[] = [
       {
         title: 'Workshop 1: TypeScript',
         date: new Date(2023, 0, 11, 16, 30),
+        location: 'Hewlett 201',
         content: [
           'Setting up a TypeScript project',
           'TypeScript basics',
@@ -86,6 +89,7 @@ const syllabus: SyllabusWeek[] = [
       {
         title: 'Workshop 2: Networking',
         date: new Date(2023, 0, 13, 12, 30),
+        location: 'Hewlett 201',
         content: [
           'TCP/IP socket connections',
           'Establishing a connection',
@@ -143,6 +147,7 @@ const syllabus: SyllabusWeek[] = [
       {
         title: 'Workshop 3: Promises and Events',
         date: new Date(2023, 0, 20, 12, 30),
+        location: 'Hewlett 201',
         content: ['JavaScript promises', 'Async/await', 'Event emitters'],
         type: 'workshop'
       }
@@ -562,55 +567,71 @@ export default function HomePage() {
             <Stack key={index} width="full" spacing={2}>
               <SubsectionTitle>{title}</SubsectionTitle>
               <Stack key={index} width="full" spacing={0}>
-                {items.map(({ title, date, content, type }, index) => {
-                  const color = type ? colors[type] : primaryColor;
-                  return (
-                    <Subsection key={index}>
-                      <Accordion allowToggle>
-                        <AccordionItem border="none">
-                          <AccordionButton
-                            borderRadius="md"
-                            p={2}
-                            justifyContent={{
-                              base: 'space-between',
-                              md: 'start'
-                            }}
-                          >
-                            <HStack spacing={4} textAlign="start">
-                              <SubsubsectionTitle color={color}>
-                                {title}
-                              </SubsubsectionTitle>
+                {items.map(
+                  ({ title, date, location, content, type }, index) => {
+                    const color = type ? colors[type] : primaryColor;
+                    return (
+                      <Subsection key={index}>
+                        <Accordion allowToggle>
+                          <AccordionItem border="none">
+                            <AccordionButton
+                              borderRadius="md"
+                              p={2}
+                              justifyContent={{
+                                base: 'space-between',
+                                md: 'start'
+                              }}
+                            >
+                              <HStack spacing={4} textAlign="start">
+                                <SubsubsectionTitle color={color}>
+                                  {title}
+                                </SubsubsectionTitle>
+                                <SubsectionTitleDate
+                                  display={{ base: 'none', lg: 'initial' }}
+                                >
+                                  {usDate(date)}
+                                  {date.getHours() !== 0
+                                    ? ` (${usTime(date)})`
+                                    : ''}
+                                </SubsectionTitleDate>
+                                {location && (
+                                  <SubsectionLocation
+                                    display={{ base: 'none', lg: 'initial' }}
+                                  >
+                                    {location}
+                                  </SubsectionLocation>
+                                )}
+                              </HStack>
+                              <AccordionIcon />
+                            </AccordionButton>
+                            <AccordionPanel>
                               <SubsectionTitleDate
-                                display={{ base: 'none', lg: 'initial' }}
+                                display={{ base: 'block', lg: 'none' }}
                               >
                                 {usDate(date)}
                                 {date.getHours() !== 0
                                   ? ` (${usTime(date)})`
                                   : ''}
                               </SubsectionTitleDate>
-                            </HStack>
-                            <AccordionIcon />
-                          </AccordionButton>
-                          <AccordionPanel>
-                            <SubsectionTitleDate
-                              display={{ base: 'initial', lg: 'none' }}
-                            >
-                              {usDate(date)}
-                              {date.getHours() !== 0
-                                ? ` (${usTime(date)})`
-                                : ''}
-                            </SubsectionTitleDate>
-                            {content.map((item, index) => (
-                              <SubectionText key={index}>
-                                • {item}
-                              </SubectionText>
-                            ))}
-                          </AccordionPanel>
-                        </AccordionItem>
-                      </Accordion>
-                    </Subsection>
-                  );
-                })}
+                              {location && (
+                                <SubsectionLocation
+                                  display={{ base: 'block', lg: 'none' }}
+                                >
+                                  {location}
+                                </SubsectionLocation>
+                              )}
+                              {content.map((item, index) => (
+                                <SubectionText key={index}>
+                                  • {item}
+                                </SubectionText>
+                              ))}
+                            </AccordionPanel>
+                          </AccordionItem>
+                        </Accordion>
+                      </Subsection>
+                    );
+                  }
+                )}
               </Stack>
             </Stack>
           );
@@ -635,6 +656,7 @@ export default function HomePage() {
                 Wed 10:00am - 11:00am
               </>
             }
+            officeHoursLocation="Packard 202"
             src="/images/dionysis.png"
             alt="Dionysis Zindros"
           />
@@ -651,6 +673,7 @@ export default function HomePage() {
             workRole="Teaching Assistant"
             email="hickmann@stanford.edu"
             officeHoursDate="Wed 4:30pm - 5:30pm"
+            officeHoursLocation="Packard 202"
             src="/images/scott.png"
             alt="Scott Hickmann"
           />
@@ -659,6 +682,7 @@ export default function HomePage() {
             workRole="Teaching Assistant"
             email="kenanhas@stanford.edu"
             officeHoursDate="Mon 5:30pm - 6:30pm"
+            officeHoursLocation="Packard 202"
             src="/images/kenan.png"
             alt="Dionysis Zindros"
           />
