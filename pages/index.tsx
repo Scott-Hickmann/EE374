@@ -551,11 +551,22 @@ export default function HomePage() {
               Questions or Concerns?
             </SubsectionTitle>
             <SubectionText>
-              Please reach out to{' '}
+              If you have any questions or concerns and are enrolled in the
+              course, please reach out on Ed at{' '}
+              <Link
+                color={primaryColor}
+                href="https://edstem.org/us/courses/31092/discussion"
+              >
+                https://edstem.org/us/courses/31092/discussion
+              </Link>
+              .
+            </SubectionText>
+            <SubectionText>
+              Otherwise, please reach out to{' '}
               <Link color={primaryColor} href="mailto:dionyziz@stanford.edu">
                 dionyziz@stanford.edu
-              </Link>{' '}
-              if you have any questions or concerns!
+              </Link>
+              .
             </SubectionText>
           </Subsection>
         </Section>
