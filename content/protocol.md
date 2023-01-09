@@ -220,17 +220,30 @@ Messages can be sent in any order after that.
 
 ## Error
 
-You can send objects with implementation-specific error messages to describe any exceptions
-encountered. An error object should be of type `error` and contain a `name` key containing a
-predefined string value and a `message` key that describes the error at hand.
+You should send objects with implementation-specific error messages to describe any exceptions
+encountered. An error object should be of type "error" and contain a `name` key containing a
+predefined string value (all possible options are listed below) and a `description` key that describes the error.
 
 ```json
 {
   "type": "error",
-  "name": "parse_error",
+  "name": "INVALID_FORMAT",
   "message": "The note field in the block message contains more than 128 characters."
 }
 ```
+
+Here's the complete list of accepted error names:
+
+- `INTERNAL_ERROR`: Something unexpected happened.
+- `INVALID_FORMAT`: The format of the received message is invalid.
+- `UNKNOWN_OBJECT`: The object requested is unknown to that specific node.
+- `UNFINDABLE_OBJECT`: The object requested could not be found in the node's network.
+- `INVALID_TX_OUTPOINT`: The transaction outpoint is invalid.
+- `INVALID_TX_SIGNATURE`: The transaction signature is invalid.
+- `INVALID_TX_CONSERVATION`: The transaction does not satisfy the weak law of conservation.
+- `INVALID_BLOCK_COINBASE`: The block coinbase transaction is invalid.
+- `INVALID_BLOCK_TIMESTAMP`: The block timestamp is invalid.
+- `INVALID_BLOCK_POW`: The block proof-of-work is invalid.
 
 ## GetPeers
 
