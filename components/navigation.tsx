@@ -29,7 +29,8 @@ const routes = [
   { title: 'Logistics', link: '/#logistic' },
   { title: 'Syllabus', link: '/#syllabus' },
   { title: 'Team', link: '/#team' },
-  { title: 'Protocol', link: '/protocol' }
+  { title: 'Protocol', link: '/protocol' },
+  { title: 'Grader', link: '/grader' }
 ] as const;
 
 function NavLinkWrapper({
@@ -106,7 +107,7 @@ export default function Navigation(): ReactElement {
             >
               <chakra.span color={'blue.400'}>EE374:</chakra.span> Blockchain
               Foundations{' '}
-              <chakra.span display={{ base: 'none', lg: 'inline' }}>
+              <chakra.span display={{ base: 'none', xl: 'inline' }}>
                 (Winter 2023)
               </chakra.span>
             </Text>
