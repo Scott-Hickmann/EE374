@@ -238,7 +238,7 @@ Here's the complete list of accepted error names:
 - `INVALID_FORMAT`: The format of the received message is invalid.
 - `UNKNOWN_OBJECT`: The object requested is unknown to that specific node.
 - `UNFINDABLE_OBJECT`: The object requested could not be found in the node's network.
-- `INVALID_HANDSHAKE`: The peer sent other messages before sending a valid `hello` message.
+- `INVALID_HANDSHAKE`: The peer sent other validly formatted messages before sending a valid `hello` message.
 - `INVALID_TX_OUTPOINT`: The transaction outpoint is invalid.
 - `INVALID_TX_SIGNATURE`: The transaction signature is invalid.
 - `INVALID_TX_CONSERVATION`: The transaction does not satisfy the weak law of conservation.

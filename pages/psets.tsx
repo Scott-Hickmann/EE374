@@ -23,7 +23,9 @@ function PSET({ softDeadline, hardDeadline, link, children }: PSETProps) {
     <Tr>
       <Td textAlign="center">
         {link ? (
-          <Link color={primaryColor}>{children}</Link>
+          <Link color={primaryColor} href={link} target="_blank">
+            {children}
+          </Link>
         ) : (
           <Text>{children}</Text>
         )}
@@ -64,8 +66,9 @@ export default function PSETsPage() {
                 <PSET
                   softDeadline={new Date(2023, 0, 17, 13, 30)}
                   hardDeadline={new Date(2023, 0, 19, 13, 30)}
+                  link="/psets/EE374_PSET_1.pdf"
                 >
-                  Problem Set 1 (releasing today)
+                  Problem Set 1
                 </PSET>
                 <PSET
                   softDeadline={new Date(2023, 0, 24, 13, 30)}
