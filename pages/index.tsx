@@ -6,8 +6,10 @@ import {
   AccordionPanel,
   HStack,
   Link,
+  ListItem,
   SimpleGrid,
   Stack,
+  UnorderedList,
   useColorModeValue
 } from '@chakra-ui/react';
 
@@ -545,6 +547,21 @@ export default function HomePage() {
               CS109, MATH151, STATS116, or EE178 or related course on
               probability
             </SubectionText>
+          </Subsection>
+          <Subsection>
+            <SubsectionTitle color={section1SubsectionTitleColor}>
+              Grading
+            </SubsectionTitle>
+            <SubectionText>
+              The grade for the course will be determined according to the
+              following breakdown:
+            </SubectionText>
+            <UnorderedList pl={4}>
+              <ListItem>Programming Exercises: 40%</ListItem>
+              <ListItem>Theory Exercises: 5%</ListItem>
+              <ListItem>Midterm: 20%</ListItem>
+              <ListItem>Final: 35%</ListItem>
+            </UnorderedList>
           </Subsection>
           <Subsection>
             <SubsectionTitle color={section1SubsectionTitleColor}>
