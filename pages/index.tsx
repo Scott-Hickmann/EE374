@@ -541,6 +541,23 @@ export default function HomePage() {
           <SectionTitle>Logistics and Details</SectionTitle>
           <Subsection>
             <SubsectionTitle color={section1SubsectionTitleColor}>
+              Administrativia
+            </SubsectionTitle>
+            <SubectionText>
+              Extended course information is available{' '}
+              <Link
+                zIndex={5}
+                color={primaryColor}
+                href="https://docs.google.com/document/d/1Ja7N5iu7hGbzPI9xNEFx3rvgtRyeHU2DG_KwzcfaRdw/edit"
+                target="_blank"
+              >
+                here
+              </Link>
+              .
+            </SubectionText>
+          </Subsection>
+          <Subsection>
+            <SubsectionTitle color={section1SubsectionTitleColor}>
               Meeting Times
             </SubsectionTitle>
             <SubectionText>
