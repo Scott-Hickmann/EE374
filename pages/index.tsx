@@ -483,12 +483,19 @@ const syllabus: SyllabusWeek[] = [
       {
         title: 'Lecture 18: BFT Proof of Stake (II)',
         date: new Date(2023, 2, 14, 13, 30),
-        content: ['The Streamlet protocol and its proof of safety']
+        content: [
+          'The Streamlet protocol and its proof of safety',
+          'Accountability and slashing'
+        ]
       },
       {
         title: 'Lecture 19: Proof of Stake Conclusion',
         date: new Date(2023, 2, 16, 13, 30),
-        content: ['Final lecture on proof of stake']
+        content: [
+          'Permissioned vs Proof of Stake: static vs dynamic stake',
+          'Stake grinding attacks and their mitigations',
+          'Stake unbonding and long range attacks and their mitigations'
+        ]
       }
     ]
   },
