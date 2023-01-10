@@ -30,6 +30,7 @@ const routes = [
   { title: 'Syllabus', link: '/#syllabus' },
   { title: 'Team', link: '/#team' },
   { title: 'Protocol', link: '/protocol' },
+  { title: 'PSETs', link: '/psets' },
   { title: 'Grader', link: '/grader' }
 ] as const;
 

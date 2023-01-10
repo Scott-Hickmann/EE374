@@ -43,11 +43,11 @@ interface SyllabusWeek {
 }
 
 const softGradingDeadlineMessage =
-  'The grader will test your node for you to get feedback. This is not graded.';
+  'The grader will test your node for you to get feedback. This is not graded. Please check out the PSETs tab for more information.';
 const hardGradingDeadlineMessage =
-  'The grader will test your node and give you a grade.';
+  'The grader will test your node and give you a grade. Please check out the PSETs tab for more information.';
 const theoryExerciseDeadlineMessage =
-  'This will be a short theory exercise to help you practice for the exam.';
+  'This will be a short theory exercise to help you practice for the exam. Please check out the PSETs tab for more information.';
 
 const syllabus: SyllabusWeek[] = [
   {
