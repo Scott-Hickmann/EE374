@@ -34,7 +34,7 @@ interface SyllabusItem {
   date: Date;
   location?: string;
   content: (JSX.Element | string)[];
-  type?: 'psetSoft' | 'psetHard' | 'exam' | 'workshop';
+  type?: 'psetSoft' | 'psetHard' | 'theoryExercise' | 'exam' | 'workshop';
 }
 
 interface SyllabusWeek {
@@ -46,6 +46,8 @@ const softGradingDeadlineMessage =
   'The grader will test your node for you to get feedback. This is not graded.';
 const hardGradingDeadlineMessage =
   'The grader will test your node and give you a grade.';
+const theoryExerciseDeadlineMessage =
+  'This will be a short theory exercise to help you practice for the exam.';
 
 const syllabus: SyllabusWeek[] = [
   {
@@ -251,6 +253,12 @@ const syllabus: SyllabusWeek[] = [
     title: 'Week 5',
     items: [
       {
+        title: 'Theory Exercise 1 Deadline',
+        date: new Date(2023, 1, 6, 13, 30),
+        content: [theoryExerciseDeadlineMessage],
+        type: 'theoryExercise'
+      },
+      {
         title: 'Lecture 9: Variable Difficulty, Pools, Wallets',
         date: new Date(2023, 1, 7, 13, 30),
         content: [
@@ -288,6 +296,12 @@ const syllabus: SyllabusWeek[] = [
   {
     title: 'Week 6',
     items: [
+      {
+        title: 'Theory Exercise 2 Deadline',
+        date: new Date(2023, 1, 13, 13, 30),
+        content: [theoryExerciseDeadlineMessage],
+        type: 'theoryExercise'
+      },
       {
         title: 'Midterm Exam',
         date: new Date(2023, 1, 14, 13, 30),
@@ -461,6 +475,12 @@ const syllabus: SyllabusWeek[] = [
     title: 'Week 10',
     items: [
       {
+        title: 'Theory Exercise 3 Deadline',
+        date: new Date(2023, 2, 13, 13, 30),
+        content: [theoryExerciseDeadlineMessage],
+        type: 'theoryExercise'
+      },
+      {
         title: 'Lecture 18: BFT Proof of Stake (II)',
         date: new Date(2023, 2, 14, 13, 30),
         content: ['The Streamlet protocol and its proof of safety']
@@ -475,6 +495,12 @@ const syllabus: SyllabusWeek[] = [
   {
     title: 'Finals Week',
     items: [
+      {
+        title: 'Theory Exercise 4 Deadline',
+        date: new Date(2023, 2, 20, 13, 30),
+        content: [theoryExerciseDeadlineMessage],
+        type: 'theoryExercise'
+      },
       {
         title: 'Take-Home Final Exam',
         date: new Date(2023, 2, 21),
@@ -492,6 +518,7 @@ export default function HomePage() {
   const colors = {
     psetSoft: 'orange.400',
     psetHard: 'red.400',
+    theoryExercise: 'red.400',
     exam: 'green.500',
     workshop: 'purple.400'
   } as const;
@@ -558,7 +585,9 @@ export default function HomePage() {
             </SubectionText>
             <UnorderedList pl={4}>
               <ListItem>Programming Exercises: 40%</ListItem>
-              <ListItem>Theory Exercises: 5%</ListItem>
+              <ListItem>
+                Theory Exercises (meant to help with exam studying): 5%
+              </ListItem>
               <ListItem>Midterm: 20%</ListItem>
               <ListItem>Final: 35%</ListItem>
             </UnorderedList>
