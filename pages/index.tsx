@@ -618,6 +618,22 @@ export default function HomePage() {
           </Subsection>
           <Subsection>
             <SubsectionTitle color={section1SubsectionTitleColor}>
+              Course Textbook
+            </SubsectionTitle>
+            <SubectionText>
+              The course textbook containing lecture notes is available{' '}
+              <Link
+                color={primaryColor}
+                href="/blockchain-foundations.pdf"
+                target="_blank"
+              >
+                here
+              </Link>
+              . It will be updated throughout the quarter.
+            </SubectionText>
+          </Subsection>
+          <Subsection>
+            <SubsectionTitle color={section1SubsectionTitleColor}>
               Questions or Concerns?
             </SubsectionTitle>
             <SubectionText>
