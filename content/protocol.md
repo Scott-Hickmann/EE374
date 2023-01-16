@@ -239,7 +239,7 @@ Here's the complete list of accepted error names:
 - `UNKNOWN_OBJECT`: The object requested is unknown to that specific node.
 - `UNFINDABLE_OBJECT`: The object requested could not be found in the node's network.
 - `INVALID_HANDSHAKE`: The peer sent other validly formatted messages before sending a valid `hello` message.
-- `INVALID_TX_OUTPOINT`: The transaction outpoint is invalid.
+- `INVALID_TX_OUTPOINT`: The transaction outpoint index is too large.
 - `INVALID_TX_SIGNATURE`: The transaction signature is invalid.
 - `INVALID_TX_CONSERVATION`: The transaction does not satisfy the weak law of conservation.
 - `INVALID_BLOCK_COINBASE`: The block coinbase transaction is invalid.
