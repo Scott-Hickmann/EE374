@@ -9,11 +9,11 @@ import {
   SubsubsectionTitle
 } from 'client/components/section';
 import TitleSection from 'client/components/titleSection';
+import { darkTheme, lightTheme } from 'client/styles/codeThemes';
 import fs from 'fs';
 import { GetStaticProps } from 'next';
 import dynamic from 'next/dynamic';
 import ReactMarkdown, { Components } from 'react-markdown';
-import { darkTheme, lightTheme } from 'styles/codeThemes';
 const SyntaxHighlighter = dynamic(
   () => import('react-syntax-highlighter/dist/esm/prism'),
   { ssr: false }
