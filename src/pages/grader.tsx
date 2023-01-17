@@ -1,14 +1,13 @@
 import { Button, Input, Select, Stack, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-
-import Layout from '../components/layout';
+import Layout from 'client/components/layout';
 import {
   Section,
   Sections,
   Subsection,
   SubsectionTitle
-} from '../components/section';
-import TitleSection from '../components/titleSection';
+} from 'client/components/section';
+import TitleSection from 'client/components/titleSection';
+import { useEffect, useState } from 'react';
 
 declare global {
   interface Window {

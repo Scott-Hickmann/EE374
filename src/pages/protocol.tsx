@@ -1,20 +1,19 @@
 import { Center, Link, useColorModeValue } from '@chakra-ui/react';
 import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
-import fs from 'fs';
-import { GetStaticProps } from 'next';
-import dynamic from 'next/dynamic';
-import ReactMarkdown, { Components } from 'react-markdown';
-
-import Layout from '../components/layout';
+import Layout from 'client/components/layout';
 import {
   Section,
   Sections,
   Subsection,
   SubsectionTitle,
   SubsubsectionTitle
-} from '../components/section';
-import TitleSection from '../components/titleSection';
-import { darkTheme, lightTheme } from '../styles/codeThemes';
+} from 'client/components/section';
+import TitleSection from 'client/components/titleSection';
+import fs from 'fs';
+import { GetStaticProps } from 'next';
+import dynamic from 'next/dynamic';
+import ReactMarkdown, { Components } from 'react-markdown';
+import { darkTheme, lightTheme } from 'styles/codeThemes';
 const SyntaxHighlighter = dynamic(
   () => import('react-syntax-highlighter/dist/esm/prism'),
   { ssr: false }

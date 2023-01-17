@@ -1,14 +1,13 @@
 import { Link, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
-
-import Layout from '../components/layout';
+import Layout from 'client/components/layout';
 import {
   Section,
   Sections,
   Subsection,
   SubsectionTitle
-} from '../components/section';
-import TitleSection from '../components/titleSection';
-import { usDate, usTime } from '../utils/date';
+} from 'client/components/section';
+import TitleSection from 'client/components/titleSection';
+import { usDate, usTime } from 'common/date';
 
 type PSETProps = React.PropsWithChildren<{
   softDeadline?: Date;

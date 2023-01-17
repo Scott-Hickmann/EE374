@@ -12,8 +12,7 @@ import {
   UnorderedList,
   useColorModeValue
 } from '@chakra-ui/react';
-
-import Layout from '../components/layout';
+import Layout from 'client/components/layout';
 import {
   Section,
   Sections,
@@ -25,9 +24,9 @@ import {
   SubsectionTitleDate,
   SubsubsectionTitle,
   TeachingTeamMember
-} from '../components/section';
-import TitleSection from '../components/titleSection';
-import { usDate, usTime } from '../utils/date';
+} from 'client/components/section';
+import TitleSection from 'client/components/titleSection';
+import { usDate, usTime } from 'common/date';
 
 interface SyllabusItem {
   title: string;
