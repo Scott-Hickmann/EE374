@@ -161,7 +161,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Problem Set 2 Soft Deadline',
-        date: new Date(2023, 0, 24, 13, 30),
+        date: new Date(2023, 0, 24, 13, 15),
         content: [softGradingDeadlineMessage],
         type: 'psetSoft'
       },
@@ -186,7 +186,7 @@ const syllabus: SyllabusWeek[] = [
       },
       {
         title: 'Problem Set 2 Hard Deadline',
-        date: new Date(2023, 0, 26, 13, 30),
+        date: new Date(2023, 0, 26, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
       },
@@ -214,7 +214,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Problem Set 3 Soft Deadline',
-        date: new Date(2023, 0, 31, 13, 30),
+        date: new Date(2023, 0, 31, 13, 15),
         content: [softGradingDeadlineMessage],
         type: 'psetSoft'
       },
@@ -232,7 +232,7 @@ const syllabus: SyllabusWeek[] = [
       },
       {
         title: 'Problem Set 3 Hard Deadline',
-        date: new Date(2023, 1, 2, 13, 30),
+        date: new Date(2023, 1, 2, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
       },
@@ -253,7 +253,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Theory Exercise 1 Deadline',
-        date: new Date(2023, 1, 6, 13, 30),
+        date: new Date(2023, 1, 6, 13, 15),
         content: [theoryExerciseDeadlineMessage],
         type: 'theoryExercise'
       },
@@ -297,7 +297,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Theory Exercise 2 Deadline',
-        date: new Date(2023, 1, 13, 13, 30),
+        date: new Date(2023, 1, 13, 13, 15),
         content: [theoryExerciseDeadlineMessage],
         type: 'theoryExercise'
       },
@@ -329,7 +329,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Problem Set 4 Soft Deadline',
-        date: new Date(2023, 1, 21, 13, 30),
+        date: new Date(2023, 1, 21, 13, 15),
         content: [softGradingDeadlineMessage],
         type: 'psetSoft'
       },
@@ -361,7 +361,7 @@ const syllabus: SyllabusWeek[] = [
       },
       {
         title: 'Problem Set 4 Hard Deadline',
-        date: new Date(2023, 1, 23, 13, 30),
+        date: new Date(2023, 1, 23, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
       },
@@ -396,7 +396,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Problem Set 5 Soft Deadline',
-        date: new Date(2023, 1, 28, 13, 30),
+        date: new Date(2023, 1, 28, 13, 15),
         content: [softGradingDeadlineMessage],
         type: 'psetSoft'
       },
@@ -416,7 +416,7 @@ const syllabus: SyllabusWeek[] = [
       },
       {
         title: 'Problem Set 5 Hard Deadline',
-        date: new Date(2023, 2, 2, 13, 30),
+        date: new Date(2023, 2, 2, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
       },
@@ -437,7 +437,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Problem Set 6 Soft Deadline',
-        date: new Date(2023, 2, 7, 13, 30),
+        date: new Date(2023, 2, 7, 13, 15),
         content: [softGradingDeadlineMessage],
         type: 'psetSoft'
       },
@@ -453,7 +453,7 @@ const syllabus: SyllabusWeek[] = [
       },
       {
         title: 'Problem Set 6 Hard Deadline',
-        date: new Date(2023, 2, 9, 13, 30),
+        date: new Date(2023, 2, 9, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
       },
@@ -475,7 +475,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Theory Exercise 3 Deadline',
-        date: new Date(2023, 2, 13, 13, 30),
+        date: new Date(2023, 2, 13, 13, 15),
         content: [theoryExerciseDeadlineMessage],
         type: 'theoryExercise'
       },
@@ -503,7 +503,7 @@ const syllabus: SyllabusWeek[] = [
     items: [
       {
         title: 'Theory Exercise 4 Deadline',
-        date: new Date(2023, 2, 20, 13, 30),
+        date: new Date(2023, 2, 20, 13, 15),
         content: [theoryExerciseDeadlineMessage],
         type: 'theoryExercise'
       },
