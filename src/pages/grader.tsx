@@ -1,4 +1,4 @@
-import { Button, Input, Select, Stack, Text } from '@chakra-ui/react';
+import { Button, Input, Select, Spinner, Stack, Text } from '@chakra-ui/react';
 import Layout from 'client/components/layout';
 import {
   Section,
@@ -7,7 +7,7 @@ import {
   SubsectionTitle
 } from 'client/components/section';
 import TitleSection from 'client/components/titleSection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 declare global {
   interface Window {
@@ -20,33 +20,26 @@ const GRADER_URL = process.env.NEXT_PUBLIC_GRADER_URL;
 export default function GraderPage() {
   const [ip, setIp] = useState<string>('');
   const [pset, setPset] = useState<number>();
-  const [ws, setWs] = useState<WebSocket | null>(null);
 
   const [messages, setMessages] = useState<string[]>([]);
+  const [isRunning, setIsRunning] = useState<boolean>(false);
 
-  useEffect(() => {
+  const grade = () => {
     if (!GRADER_URL) return;
-
+    if (!ip || !pset) return;
+    setIsRunning(true);
+    setMessages([]);
     const ws = new window.WebSocket(GRADER_URL);
-    setWs(ws);
-
     ws.onmessage = (event) => {
       const message: string = event.data;
       setMessages((messages) => [...messages, message]);
     };
-
-    // Clean up the WebSocket connection when the component unmounts
-    return () => {
-      ws.close();
-    };
-  }, []);
-
-  const grade = () => {
-    if (!ip || !pset) return;
-    setMessages([]);
-    if (ws) {
+    ws.onopen = () => {
       ws.send(JSON.stringify({ ip, pset }));
-    }
+    };
+    ws.onclose = () => {
+      setIsRunning(false);
+    };
   };
 
   return (
@@ -90,11 +83,11 @@ export default function GraderPage() {
                     <option value={1}>PSET 1</option>
                   </Select>
                   <Button
-                    disabled={!ip || !pset}
+                    disabled={!ip || !pset || isRunning}
                     width="fit-content"
                     onClick={grade}
                   >
-                    Run Soft Grader
+                    {isRunning ? <Spinner /> : 'Run Soft Grader'}
                   </Button>
                 </Stack>
               </Subsection>
@@ -104,6 +97,7 @@ export default function GraderPage() {
                   <Text key={index}>{message}</Text>
                 ))}
               </Subsection>
+              {isRunning && <Spinner />}
             </>
           ) : (
             <Subsection>
