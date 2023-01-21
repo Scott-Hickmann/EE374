@@ -1,4 +1,14 @@
-import { Link, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
+import {
+  Link,
+  Stack,
+  Table,
+  Tbody,
+  Td,
+  Text,
+  Th,
+  Thead,
+  Tr
+} from '@chakra-ui/react';
 import Layout from 'client/components/layout';
 import {
   Section,
@@ -13,21 +23,35 @@ type PSETProps = React.PropsWithChildren<{
   softDeadline?: Date;
   hardDeadline: Date;
   link?: string;
+  solutionLink?: string;
 }>;
 
-function PSET({ softDeadline, hardDeadline, link, children }: PSETProps) {
+function PSET({
+  softDeadline,
+  hardDeadline,
+  link,
+  solutionLink,
+  children
+}: PSETProps) {
   const primaryColor = 'blue.400';
 
   return (
     <Tr>
       <Td textAlign="center">
-        {link ? (
-          <Link color={primaryColor} href={link} target="_blank">
-            {children}
-          </Link>
-        ) : (
-          <Text>{children}</Text>
-        )}
+        <Stack spacing={2}>
+          {link ? (
+            <Link color={primaryColor} href={link} target="_blank">
+              {children}
+            </Link>
+          ) : (
+            <Text>{children}</Text>
+          )}
+          {solutionLink ? (
+            <Link color={primaryColor} href={solutionLink} target="_blank">
+              {children} Solution
+            </Link>
+          ) : null}
+        </Stack>
       </Td>
       <Td textAlign="center">
         {softDeadline && (
@@ -66,6 +90,7 @@ export default function PSETsPage() {
                   softDeadline={new Date(2023, 0, 17, 13, 30)}
                   hardDeadline={new Date(2023, 0, 19, 13, 30)}
                   link="/psets/EE374_PSET_1.pdf"
+                  solutionLink="/psets/EE374_PSET_1_Solution.zip"
                 >
                   Problem Set 1
                 </PSET>
