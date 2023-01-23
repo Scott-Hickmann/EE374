@@ -9,9 +9,10 @@ dayjs.extend(relativeTime);
 
 export interface BlockComponentProps {
   id: string;
+  hideLinks?: boolean;
 }
 
-export function BlockComponent({ id }: BlockComponentProps) {
+export function BlockComponent({ id, hideLinks }: BlockComponentProps) {
   const { data: block } = trpc.blocks.getById.useQuery(id);
   const { data: childBlocks } = trpc.blocks.getChildren.useQuery(id);
 
@@ -40,27 +41,31 @@ export function BlockComponent({ id }: BlockComponentProps) {
       <li>
         <strong>Note</strong>: {block.note}
       </li>
-      <li>
-        <strong>Parent block</strong>:{' '}
-        {block.previd === null ? (
-          <strong>None. Genesis block.</strong>
-        ) : (
-          <BlockLink id={block.previd} />
-        )}
-      </li>
-      <HStack spacing={1}>
-        <li>
-          <strong>
-            Child block{(childBlocks?.length ?? 0) > 1 ? 's' : ''}
-          </strong>
-          :
-        </li>
-        <HStack>
-          {childBlocks?.map((block) => (
-            <BlockLink key={block.id} id={block.id} />
-          ))}
-        </HStack>
-      </HStack>
+      {!hideLinks && (
+        <>
+          <li>
+            <strong>Parent block</strong>:{' '}
+            {block.previd === null ? (
+              <strong>None. Genesis block.</strong>
+            ) : (
+              <BlockLink id={block.previd} />
+            )}
+          </li>
+          <HStack spacing={1}>
+            <li>
+              <strong>
+                Child block{(childBlocks?.length ?? 0) > 1 ? 's' : ''}
+              </strong>
+              :
+            </li>
+            <HStack>
+              {childBlocks?.map((block) => (
+                <BlockLink key={block.id} id={block.id} />
+              ))}
+            </HStack>
+          </HStack>
+        </>
+      )}
       <li>
         <strong>
           {block.txids.length} transaction{block.txids.length > 1 ? 's' : ''}

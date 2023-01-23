@@ -18,10 +18,10 @@ export async function getChildBlocks(id: Id): Promise<Block[]> {
 }
 
 export async function getChain(id: Id, limit = 10): Promise<string[]> {
-  const [res] = await BlockModel.aggregate<{ chain: string[] }>([
-    {
-      $match: { id }
-    },
+  const [res] = await BlockModel.aggregate<{
+    chain: string[];
+  }>([
+    { $match: { id: id } },
     {
       $graphLookup: {
         from: 'blocks',
@@ -29,12 +29,19 @@ export async function getChain(id: Id, limit = 10): Promise<string[]> {
         connectFromField: 'previd',
         connectToField: 'id',
         as: 'chain',
-        maxDepth: limit
+        maxDepth: limit,
+        depthField: 'depth'
       }
     },
+    { $unwind: '$chain' },
+    { $sort: { 'chain.depth': 1 } },
     {
-      $project: { chain: '$chain.id' }
-    }
+      $group: {
+        _id: '$_id',
+        chain: { $push: '$chain.id' }
+      }
+    },
+    { $project: { chain: 1 } }
   ]);
-  return res.chain;
+  return res?.chain ?? [];
 }
