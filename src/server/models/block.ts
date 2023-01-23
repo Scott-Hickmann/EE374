@@ -1,12 +1,5 @@
 import { Block, TARGET } from 'common/block';
-import {
-  HydratedDocument,
-  Model,
-  model,
-  models,
-  ObjectId,
-  Schema
-} from 'mongoose';
+import { HydratedDocument, Model, model, models, Schema } from 'mongoose';
 
 import { defaultSchemaOptions } from './common';
 
@@ -15,6 +8,7 @@ export type BlockModelType = Block;
 const schema = new Schema<BlockModelType>(
   {
     id: { type: String, required: true, unique: true, index: true },
+    height: { type: Number, required: true },
     type: { type: String, required: true, enum: ['block'] },
     created: { type: Number, required: true, min: 0 },
     T: { type: String, required: true, enum: [TARGET] },
@@ -38,13 +32,4 @@ export function blockToDoc(block: Block): BlockModelType {
 
 export function docToBlock(block: HydratedDocument<BlockModelType>): Block {
   return block.toObject();
-}
-
-export function aggregationToBlock(
-  block: Block & { _id: ObjectId; __v: string }
-): Block {
-  const keys = Object.keys(Block.shape);
-  return Object.fromEntries(
-    Object.entries(block).filter(([key]) => keys.includes(key))
-  ) as Block;
 }

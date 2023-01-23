@@ -12,6 +12,7 @@ const CappedString = z.string().max(128);
 
 export const Block = z.object({
   id: Id,
+  height: z.number().nonnegative(),
   type: z.literal('block'),
   created: z.number().nonnegative(),
   T: z.literal(TARGET),

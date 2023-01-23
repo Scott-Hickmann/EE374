@@ -45,3 +45,32 @@ export async function getChain(id: Id, limit = 10): Promise<string[]> {
   ]);
   return res?.chain ?? [];
 }
+
+export async function getChainReverse(id: Id, limit = 10): Promise<string[]> {
+  const [res] = await BlockModel.aggregate<{
+    chain: string[];
+  }>([
+    { $match: { id: id } },
+    {
+      $graphLookup: {
+        from: 'blocks',
+        startWith: '$id',
+        connectFromField: 'id',
+        connectToField: 'previd',
+        as: 'chain',
+        maxDepth: limit,
+        depthField: 'depth'
+      }
+    },
+    { $unwind: '$chain' },
+    { $sort: { 'chain.depth': 1 } },
+    {
+      $group: {
+        _id: '$_id',
+        chain: { $push: '$chain.id' }
+      }
+    },
+    { $project: { chain: 1 } }
+  ]);
+  return res?.chain ?? [];
+}
