@@ -206,8 +206,7 @@ must also contain a `version` key. If the version you receive differs
 from `0.9.x` (x being any number) you must disconnect. The message can also contain an `agent` key, with a string description
 of the node software name and version the node is running.
 
-You must exchange a hello message both ways before you exchange any
-other message. If a message is sent prior to the hello message, you must close the connection.
+If a message is sent prior to the hello message, you must close the connection.
 Messages can be sent in any order after that.
 
 ```json
