@@ -317,7 +317,7 @@ message. It contains an `object` key which contains the object in question.
     ],
     "nonce": "a26d92800cf58e88a5ecf37156c031a4147c2128beeaf1cca2785c93242a4c8b",
     "previd": "0024839ec9632d382486ba7aac7e0bda3b4bda1d4bd79be9ae78e7e1e813ddd8",
-    "created": "1622825642",
+    "created": 1622825642,
     "T": "003a000000000000000000000000000000000000000000000000000000000000"
   }
 }
