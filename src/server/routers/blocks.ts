@@ -4,7 +4,8 @@ import {
   createBlock,
   getBlockById,
   getChain,
-  getChildBlocks
+  getChildBlocks,
+  getTree
 } from 'server/controllers/blocks';
 import { BlockModel } from 'server/models/block';
 import {
@@ -51,5 +52,8 @@ export const blocksRouter = router({
         nextCursor = blockIds[blockIds.length - 1];
       }
       return { blockIds, nextCursor };
-    })
+    }),
+  getTree: databaseProcedure.query(async () => {
+    return getTree();
+  })
 });

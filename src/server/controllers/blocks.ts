@@ -74,3 +74,14 @@ export async function getChainReverse(id: Id, limit = 10): Promise<string[]> {
   ]);
   return res?.chain ?? [];
 }
+
+export async function getTree() {
+  const docs = await BlockModel.find().sort({ height: 1 });
+  const tree: Block[][] = [];
+  for (const doc of docs) {
+    const height = doc.height;
+    if (!tree[height]) tree.push([]);
+    tree[height].push(docToBlock(doc));
+  }
+  return tree;
+}
