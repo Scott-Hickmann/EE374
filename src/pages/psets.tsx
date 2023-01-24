@@ -95,46 +95,46 @@ export default function PSETsPage() {
                   Problem Set 1
                 </PSET>
                 <PSET
-                  softDeadline={new Date(2023, 0, 24, 13, 30)}
-                  hardDeadline={new Date(2023, 0, 26, 13, 30)}
+                  softDeadline={new Date(2023, 0, 24, 13, 15)}
+                  hardDeadline={new Date(2023, 0, 26, 13, 15)}
                   link="/psets/EE374_PSET_2.pdf"
                 >
                   Problem Set 2
                 </PSET>
                 <PSET
-                  softDeadline={new Date(2023, 0, 31, 13, 30)}
-                  hardDeadline={new Date(2023, 1, 2, 13, 30)}
+                  softDeadline={new Date(2023, 0, 31, 13, 15)}
+                  hardDeadline={new Date(2023, 1, 2, 13, 15)}
                 >
                   Problem Set 3
                 </PSET>
-                <PSET hardDeadline={new Date(2023, 1, 6, 13, 30)}>
+                <PSET hardDeadline={new Date(2023, 1, 6, 13, 15)}>
                   Theory Exercise 1
                 </PSET>
-                <PSET hardDeadline={new Date(2023, 1, 13, 13, 30)}>
+                <PSET hardDeadline={new Date(2023, 1, 13, 13, 15)}>
                   Theory Exercise 2
                 </PSET>
                 <PSET
-                  softDeadline={new Date(2023, 1, 21, 13, 30)}
-                  hardDeadline={new Date(2023, 1, 23, 13, 30)}
+                  softDeadline={new Date(2023, 1, 21, 13, 15)}
+                  hardDeadline={new Date(2023, 1, 23, 13, 15)}
                 >
                   Problem Set 4
                 </PSET>
                 <PSET
-                  softDeadline={new Date(2023, 1, 28, 13, 30)}
-                  hardDeadline={new Date(2023, 2, 2, 13, 30)}
+                  softDeadline={new Date(2023, 1, 28, 13, 15)}
+                  hardDeadline={new Date(2023, 2, 2, 13, 15)}
                 >
                   Problem Set 5
                 </PSET>
                 <PSET
-                  softDeadline={new Date(2023, 2, 7, 13, 30)}
-                  hardDeadline={new Date(2023, 2, 9, 13, 30)}
+                  softDeadline={new Date(2023, 2, 7, 13, 15)}
+                  hardDeadline={new Date(2023, 2, 9, 13, 15)}
                 >
                   Problem Set 6
                 </PSET>
-                <PSET hardDeadline={new Date(2023, 2, 13, 13, 30)}>
+                <PSET hardDeadline={new Date(2023, 2, 13, 13, 15)}>
                   Theory Exercise 3
                 </PSET>
-                <PSET hardDeadline={new Date(2023, 2, 20, 13, 30)}>
+                <PSET hardDeadline={new Date(2023, 2, 20, 13, 15)}>
                   Theory Exercise 4
                 </PSET>
               </Tbody>
