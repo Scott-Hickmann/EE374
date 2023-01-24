@@ -201,9 +201,9 @@ but are not mandatory, and other fields that are not mentioned should not be pre
 
 ## Hello
 
-When you connect to another client, you must both send a { "type": "hello" } message. The message
-must also contain a `version` key, which is always set to `0.9.0`. If the version you receive differs
-from `0.9.x` you must disconnect. The message can also contain an `agent` key, with a string description
+When you connect to another client, you must both send a { "type": "hello" } message followed by a { "type": "getpeers" } message. The message
+must also contain a `version` key. If the version you receive differs
+from `0.9.x` (x being any number) you must disconnect. The message can also contain an `agent` key, with a string description
 of the node software name and version the node is running.
 
 You must exchange a hello message both ways before you exchange any
