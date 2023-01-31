@@ -81,6 +81,7 @@ export default function GraderPage() {
                     onChange={(event) => setPset(parseInt(event.target.value))}
                   >
                     <option value={1}>PSET 1</option>
+                    <option value={2}>PSET 2</option>
                   </Select>
                   <Button
                     disabled={!ip || !pset || isRunning}
