@@ -227,7 +227,7 @@ predefined string value (all possible options are listed below) and a `descripti
 {
   "type": "error",
   "name": "INVALID_FORMAT",
-  "message": "The note field in the block message contains more than 128 characters."
+  "description": "The note field in the block message contains more than 128 characters."
 }
 ```
 
