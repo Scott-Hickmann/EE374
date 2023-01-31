@@ -2,11 +2,24 @@ import Head from 'next/head';
 
 import Navigation from './navigation';
 
+export type ExplorerLayoutProps = React.PropsWithChildren<unknown>;
+
 export type LayoutProps = React.PropsWithChildren<{
   title: string;
   description: string;
   image?: string;
 }>;
+
+export function ExplorerLayout({ children }: ExplorerLayoutProps) {
+  return (
+    <Layout
+      title="EE374: Explorer"
+      description="EE374 Marabu Blockchain Explorer"
+    >
+      {children}
+    </Layout>
+  );
+}
 
 export default function Layout({
   title,
