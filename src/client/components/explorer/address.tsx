@@ -1,7 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 import { trpc } from 'client/trpc';
 
-import { Amount } from './amount';
 import { TransactionLink } from './objectLink';
 
 export interface AddressComponentProps {
@@ -17,17 +16,18 @@ export function AddressComponent({ id }: AddressComponentProps) {
     <Stack>
       <h5 className="title is-5">Address {id}</h5>
 
-      <div>
+      {/* TODO: only keep longest chain amounts */}
+      {/* <div>
         <strong>Total amount received</strong>:{' '}
         <Amount amount={account.balance} />
-      </div>
+      </div> */}
 
       <div>
         <strong>{account.transactionIds.length} transaction outputs</strong>:{' '}
         <ol>
           {account.transactionIds.map((transactionId, index) => (
             <li key={transactionId}>
-              <TransactionLink id={transactionId} />, {index}
+              {index + 1}. <TransactionLink id={transactionId} />
             </li>
           ))}
         </ol>
