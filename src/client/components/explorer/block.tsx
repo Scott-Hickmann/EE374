@@ -1,4 +1,4 @@
-import { HStack } from '@chakra-ui/react';
+import { HStack, Stack } from '@chakra-ui/react';
 import { trpc } from 'client/trpc';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -51,18 +51,18 @@ export function BlockComponent({ id, hideLinks }: BlockComponentProps) {
               <BlockLink id={block.previd} />
             )}
           </li>
-          <HStack spacing={1}>
+          <HStack spacing={1} align="start">
             <li>
               <strong>
                 Child block{(childBlocks?.length ?? 0) > 1 ? 's' : ''}
               </strong>
               :
             </li>
-            <HStack>
+            <Stack spacing={0}>
               {childBlocks?.map((block) => (
                 <BlockLink key={block.id} id={block.id} />
               ))}
-            </HStack>
+            </Stack>
           </HStack>
         </>
       )}
