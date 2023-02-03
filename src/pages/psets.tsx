@@ -106,6 +106,7 @@ export default function PSETsPage() {
                   softDeadline={new Date(2023, 0, 31, 13, 15)}
                   hardDeadline={new Date(2023, 1, 2, 13, 15)}
                   link="/psets/EE374_PSET_3.pdf"
+                  solutionLink="/psets/EE374_PSET_3_Solution.zip"
                 >
                   Problem Set 3
                 </PSET>
