@@ -304,7 +304,7 @@ const syllabus: SyllabusWeek[] = [
       {
         title: 'Midterm Exam',
         date: new Date(2023, 1, 14, 13, 30),
-        content: ['More information will be posted soon.'],
+        content: ['More information available on Ed'],
         type: 'exam'
       },
       {
