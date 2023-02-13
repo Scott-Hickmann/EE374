@@ -26,12 +26,13 @@ type NavLinkProps = React.PropsWithChildren<{
 }>;
 
 const routes = [
-  { title: 'Logistics', link: '/#logistic' },
+  { title: 'Info', link: '/#logistic' },
   { title: 'Syllabus', link: '/#syllabus' },
   { title: 'Team', link: '/#team' },
   { title: 'Protocol', link: '/protocol' },
   { title: 'Explorer', link: '/explorer' },
   { title: 'PSETs', link: '/psets' },
+  { title: 'Exams', link: '/exams' },
   { title: 'Grader', link: '/grader' }
 ] as const;
 
@@ -92,7 +93,7 @@ export default function Navigation(): ReactElement {
           size={'md'}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           aria-label="Open Menu"
-          display={{ md: 'none' }}
+          display={{ lg: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack
@@ -105,7 +106,7 @@ export default function Navigation(): ReactElement {
             <Text
               fontWeight={600}
               whiteSpace="nowrap"
-              fontSize={{ base: 'md', sm: 'lg', md: 'xl', lg: '2xl' }}
+              fontSize={{ base: 'md', sm: 'lg', md: 'xl', xl: '2xl' }}
             >
               <chakra.span color={'blue.400'}>EE374:</chakra.span> Blockchain
               Foundations{' '}
@@ -119,8 +120,8 @@ export default function Navigation(): ReactElement {
               <HStack
                 as={'nav'}
                 width="full"
-                spacing={{ base: 2, lg: 4 }}
-                display={{ base: 'none', md: 'flex' }}
+                spacing={{ base: 2, xl: 4 }}
+                display={{ base: 'none', lg: 'flex' }}
               >
                 {routes.map(({ title, link }) => (
                   <NavLink key={title} href={link}>
@@ -136,7 +137,7 @@ export default function Navigation(): ReactElement {
         </HStack>
       </HStack>
       {isOpen ? (
-        <Box pb={4} display={{ md: 'none' }}>
+        <Box pb={4} display={{ lg: 'none' }}>
           <Stack as={'nav'} spacing={4}>
             {routes.map(({ title, link }) => (
               <NavLink key={title} href={link}>
