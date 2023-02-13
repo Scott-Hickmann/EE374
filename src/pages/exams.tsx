@@ -48,12 +48,12 @@ function Exam({ link, solutionsLink, children }: ExamProps) {
   );
 }
 
-export default function PSETsPage() {
+export default function ExamsPage() {
   return (
-    <Layout title="EE374: PSETs" description="EE374 Exams">
+    <Layout title="EE374: Exams" description="EE374 Exams">
       <Sections>
         <TitleSection title="EE374 Exams" />
-        <Section id="psets">
+        <Section id="exams">
           <Subsection>
             <SubsectionTitle>Exams and Practice</SubsectionTitle>
             <Table>
