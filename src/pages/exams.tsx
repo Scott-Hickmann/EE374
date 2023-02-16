@@ -64,10 +64,18 @@ export default function ExamsPage() {
               </Thead>
               <Tbody>
                 <Exam
-                  link="/midterm/EE_374_Practice_Midterm.pdf"
-                  solutionsLink="/midterm/EE_374_Practice_Midterm_Solutions.pdf"
+                  link="/midterm/EE374_Practice_Midterm.pdf"
+                  solutionsLink="/midterm/EE374_Practice_Midterm_Solutions.pdf"
                 >
                   Practice Midterm
+                </Exam>
+              </Tbody>
+              <Tbody>
+                <Exam
+                  link="/midterm/EE374_Winter_2023_Midterm.pdf"
+                  solutionsLink="/midterm/EE374_Winter_2023_Midterm_Solutions.pdf"
+                >
+                  Winter 2023 Midterm
                 </Exam>
               </Tbody>
             </Table>
