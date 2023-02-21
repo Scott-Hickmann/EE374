@@ -29,7 +29,7 @@
     "mongoose": "^6.8.4",
     "nanoid": "^4.0.0",
     "next": "^13.0.2",
-    "next-auth": "^4.6.1",
+    "next-auth": "^4.19.2",
     "pixi-viewport": "^4.38.0",
     "pixi.js": "6",
     "react": "18.2.0",

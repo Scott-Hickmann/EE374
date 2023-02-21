@@ -419,16 +419,6 @@ const syllabus: SyllabusWeek[] = [
         date: new Date(2023, 2, 2, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
-      },
-      {
-        title: 'Lecture 15: Longest Chain Proof of Stake (I)',
-        date: new Date(2023, 2, 2, 13, 30),
-        content: [
-          "Proof of Work's perils and environmental impact",
-          'Proof of Work vs Proof of Stake',
-          'Dangers of Proof of Stake',
-          'The Proof of Stake equation'
-        ]
       }
     ]
   },
@@ -442,7 +432,7 @@ const syllabus: SyllabusWeek[] = [
         type: 'psetSoft'
       },
       {
-        title: 'Lecture 16: Longest Chain Proof of Stake (II)',
+        title: 'Lecture 15: Longest Chain Proof of Stake (I)',
         date: new Date(2023, 2, 7, 13, 30),
         content: [
           "Proof of Work's perils and environmental impact",
@@ -458,14 +448,13 @@ const syllabus: SyllabusWeek[] = [
         type: 'psetHard'
       },
       {
-        title: 'Lecture 17: BFT Proof of Stake (I)',
+        title: 'Lecture 16: Longest Chain Proof of Stake (II)',
         date: new Date(2023, 2, 9, 13, 30),
         content: [
-          'Everything is a Race and Nakamoto Always Wins',
-          'Verifiable Random Functions',
-          'VRF correctness',
-          'The unpredictability game',
-          'Towards instant finality'
+          "Proof of Work's perils and environmental impact",
+          'Proof of Work vs Proof of Stake',
+          'Dangers of Proof of Stake',
+          'The Proof of Stake equation'
         ]
       }
     ]
@@ -480,16 +469,36 @@ const syllabus: SyllabusWeek[] = [
         type: 'theoryExercise'
       },
       {
-        title: 'Lecture 18: BFT Proof of Stake (II)',
+        title: 'Lecture 17: BFT Proof of Stake (I)',
         date: new Date(2023, 2, 14, 13, 30),
+        content: [
+          'Everything is a Race and Nakamoto Always Wins',
+          'Verifiable Random Functions',
+          'VRF correctness',
+          'The unpredictability game',
+          'Towards instant finality'
+        ]
+      },
+      {
+        title: 'Lecture 18: BFT Proof of Stake (II)',
+        date: new Date(2023, 2, 16, 13, 30),
         content: [
           'The Streamlet protocol and its proof of safety',
           'Accountability and slashing'
         ]
       },
       {
-        title: 'Lecture 19: Proof of Stake Conclusion',
-        date: new Date(2023, 2, 16, 13, 30),
+        title: 'Lecture 19 (Option 1): Proof of Stake Conclusion',
+        date: new Date(2023, 2, 16, 15, 0),
+        content: [
+          'Permissioned vs Proof of Stake: static vs dynamic stake',
+          'Stake grinding attacks and their mitigations',
+          'Stake unbonding and long range attacks and their mitigations'
+        ]
+      },
+      {
+        title: 'Lecture 19 (Option 2): Proof of Stake Conclusion',
+        date: new Date(2023, 2, 16, 16, 30),
         content: [
           'Permissioned vs Proof of Stake: static vs dynamic stake',
           'Stake grinding attacks and their mitigations',
