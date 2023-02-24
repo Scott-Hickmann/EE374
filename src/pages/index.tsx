@@ -768,7 +768,7 @@ export default function HomePage() {
             name="Scott Hickmann"
             workRole="Teaching Assistant"
             email="hickmann@stanford.edu"
-            officeHoursDate="Fri 2:30pm - 3:30pm (weeks 5 and 6)"
+            officeHoursDate="Wed 4:30pm - 5:30pm"
             officeHoursLocation="Packard 202"
             src="/images/scott.png"
             alt="Scott Hickmann"
