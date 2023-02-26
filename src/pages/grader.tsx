@@ -90,7 +90,7 @@ export default function GraderPage() {
                     width="fit-content"
                     onClick={grade}
                   >
-                    {isRunning ? <Spinner /> : 'Run Soft Grader'}
+                    {isRunning ? <Spinner /> : 'Run Grader'}
                   </Button>
                 </Stack>
               </Subsection>
