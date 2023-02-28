@@ -419,6 +419,11 @@ const syllabus: SyllabusWeek[] = [
         date: new Date(2023, 2, 2, 13, 15),
         content: [hardGradingDeadlineMessage],
         type: 'psetHard'
+      },
+      {
+        title: 'No Lecture!',
+        date: new Date(2023, 2, 2),
+        content: []
       }
     ]
   },
@@ -488,18 +493,22 @@ const syllabus: SyllabusWeek[] = [
         ]
       },
       {
-        title: 'Lecture 19 (Option 1): Proof of Stake Conclusion',
+        title:
+          'Lecture 19 (Option 1, Room 380-380F): Proof of Stake Conclusion',
         date: new Date(2023, 2, 16, 15, 0),
         content: [
+          'This lecture will be held in Room 380-380F (https://25live.collegenet.com/pro/stanford#!/home/location/137/details)',
           'Permissioned vs Proof of Stake: static vs dynamic stake',
           'Stake grinding attacks and their mitigations',
           'Stake unbonding and long range attacks and their mitigations'
         ]
       },
       {
-        title: 'Lecture 19 (Option 2): Proof of Stake Conclusion',
+        title:
+          'Lecture 19 (Option 2, Room 380-380F): Proof of Stake Conclusion',
         date: new Date(2023, 2, 16, 16, 30),
         content: [
+          'This lecture will be held in Room 380-380F (https://25live.collegenet.com/pro/stanford#!/home/location/137/details)',
           'Permissioned vs Proof of Stake: static vs dynamic stake',
           'Stake grinding attacks and their mitigations',
           'Stake unbonding and long range attacks and their mitigations'
