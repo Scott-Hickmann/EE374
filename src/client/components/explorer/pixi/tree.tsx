@@ -18,8 +18,11 @@ export interface PixiTreeProps {
 }
 
 export function getBounds(y: number, tree: Record<number, Block[]>) {
-  const topY = y + BLOCK_V_OFFSET;
-  const bottomY = y + Object.keys(tree).length * BLOCK_V_OFFSET + BLOCK_HEIGHT;
+  const heights = Object.keys(tree).map((key) => parseInt(key));
+  const maxHeight = Math.max(...heights);
+  const minHeight = Math.min(...heights);
+  const topY = y - maxHeight * BLOCK_V_OFFSET;
+  const bottomY = y - minHeight * BLOCK_V_OFFSET + BLOCK_HEIGHT;
   return { topY, bottomY };
 }
 
@@ -31,46 +34,49 @@ export function PixiTree({
   onClick
 }: PixiTreeProps) {
   // Sort unsortedTree by key
-  const rawTree = Object.entries(unsortedTree)
-    .sort(([a], [b]) => parseInt(a) - parseInt(b))
-    .map(([, value]) => value);
-  const tree: Block[][] = [];
-  rawTree.forEach((row, i) => {
-    if (i === 0) {
-      tree.push([...row]);
+  const sortedTree = Object.entries(unsortedTree).sort(
+    ([a], [b]) => parseInt(a) - parseInt(b)
+  );
+  const tree: Record<number, Block[]> = [];
+  sortedTree.forEach(([key, row]) => {
+    const height = parseInt(key);
+    if (!tree[height - 1]) {
+      tree[height] = [...row];
       return;
     }
     const sortLookup = Object.fromEntries(
-      tree[i - 1].map((block, j) => [block.id, j])
+      tree[height - 1].map((block, j) => [block.id, j])
     );
     sortLookup[''] = -1;
-    tree.push(
-      [...row].sort(
-        (a, b) =>
-          (sortLookup[a.previd ?? ''] ?? -1) -
-          (sortLookup[b.previd ?? ''] ?? -1)
-      )
+    tree[height] = [...row].sort(
+      (a, b) =>
+        (sortLookup[a.previd ?? ''] ?? -1) - (sortLookup[b.previd ?? ''] ?? -1)
     );
   });
 
+  const treeEntries = Object.entries(tree).map(([key, row]) => ({
+    height: parseInt(key),
+    row
+  }));
+
   const blockCoords = Object.fromEntries(
-    tree.flatMap((row, i) =>
-      row.map((block, j) => {
+    treeEntries.flatMap(({ height, row }) => {
+      return row.map((block, j) => {
         const entry: [string, { x: number; y: number }] = [
           block.id,
           {
             x: x + (j - (row.length - 1) / 2) * BLOCK_H_OFFSET,
-            y: y + (tree.length - i) * BLOCK_V_OFFSET
+            y: y - height * BLOCK_V_OFFSET
           }
         ];
         return entry;
-      })
-    )
+      });
+    })
   );
 
   return (
     <>
-      {tree.map((row) =>
+      {treeEntries.map(({ row }) =>
         row.map((block) => {
           const { x: blockX, y: blockY } = blockCoords[block.id];
           const parentCoords = block.previd

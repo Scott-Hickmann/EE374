@@ -10,26 +10,91 @@ import {
 } from '@chakra-ui/react';
 import { Stage } from '@pixi/react-pixi';
 import { trpc } from 'client/trpc';
+import { Block } from 'common/block';
 import { Id } from 'common/id';
 import { Viewport as PixiViewport } from 'pixi-viewport';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useWindowSize } from 'usehooks-ts';
 
 import { BlockComponent } from './block';
+import { BLOCK_V_OFFSET } from './pixi/block';
 import { getBounds, PixiTree } from './pixi/tree';
 import { Viewport } from './viewport';
 
-const START_Y = 100;
+const START_Y = 0;
 const LIMIT = 10;
 const SCROLL_BUFFER = 100;
 
-export function ChainComponent() {
-  const { data, fetchNextPage } = trpc.blocks.getTree.useInfiniteQuery(
+interface UseInfiniteLoadParams {
+  tree: Record<number, Block[]>;
+  viewportRef: React.RefObject<PixiViewport>;
+  fetchPage: () => Promise<unknown>;
+  loadCondition: ({
+    topY,
+    bottomY,
+    viewportTopY,
+    viewportBottomY
+  }: {
+    topY: number;
+    bottomY: number;
+    viewportTopY: number;
+    viewportBottomY: number;
+  }) => boolean;
+  hasMore: boolean | undefined;
+}
+
+const useInfiniteLoad = ({
+  viewportRef,
+  fetchPage,
+  tree,
+  loadCondition,
+  hasMore
+}: UseInfiniteLoadParams) => {
+  useEffect(() => {
+    if (!hasMore) return;
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const onDrag = async () => {
+      const { topY, bottomY } = getBounds(START_Y, tree);
+      const { y, height } = viewport.getVisibleBounds();
+      if (
+        loadCondition({
+          topY,
+          bottomY,
+          viewportTopY: y,
+          viewportBottomY: y + height
+        })
+      ) {
+        fetchPage();
+        viewport.off('moved', onDrag);
+      }
+    };
+    viewport.on('moved', onDrag);
+    return () => {
+      viewport.off('moved', onDrag);
+    };
+  }, [viewportRef, tree, fetchPage, loadCondition, hasMore]);
+};
+
+export interface ChainComponentProps {
+  tipHeight: number;
+}
+
+export function ChainComponent({ tipHeight }: ChainComponentProps) {
+  const {
+    data,
+    fetchNextPage,
+    fetchPreviousPage,
+    hasNextPage,
+    hasPreviousPage
+  } = trpc.blocks.getTree.useInfiniteQuery(
     {
-      limit: LIMIT
+      limit: LIMIT,
+      chainTipHeight: tipHeight
     },
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
+      getPreviousPageParam: (firstPage) => firstPage.previousCursor,
       refetchOnWindowFocus: false
     }
   );
@@ -68,25 +133,22 @@ export function ChainComponent() {
     [data]
   );
 
-  useEffect(() => {
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-    const onDrag = () => {
-      const { bottomY } = getBounds(START_Y, tree);
-      const { y, height } = viewport.getVisibleBounds();
-      // if (y < topY) {
-      //   console.log('top');
-      // }
-      if (y + height > bottomY - SCROLL_BUFFER) {
-        fetchNextPage();
-        viewport.off('moved', onDrag);
-      }
-    };
-    viewport.on('moved', onDrag);
-    return () => {
-      viewport.off('moved', onDrag);
-    };
-  }, [viewportRef, tree, fetchNextPage]);
+  useInfiniteLoad({
+    viewportRef,
+    fetchPage: fetchPreviousPage,
+    tree,
+    loadCondition: ({ topY, viewportTopY }) =>
+      viewportTopY < topY + SCROLL_BUFFER,
+    hasMore: hasPreviousPage
+  });
+  useInfiniteLoad({
+    viewportRef,
+    fetchPage: fetchNextPage,
+    tree,
+    loadCondition: ({ bottomY, viewportBottomY }) =>
+      viewportBottomY > bottomY - SCROLL_BUFFER,
+    hasMore: hasNextPage
+  });
 
   return (
     <>
@@ -114,6 +176,8 @@ export function ChainComponent() {
           screenHeight={height}
           worldWidth={1000}
           worldHeight={1000}
+          centerX={0}
+          centerY={-tipHeight * BLOCK_V_OFFSET}
         >
           <PixiTree
             tree={tree}

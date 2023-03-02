@@ -1,4 +1,4 @@
-import { HStack, Stack } from '@chakra-ui/react';
+import { HStack, Link, Stack } from '@chakra-ui/react';
 import { trpc } from 'client/trpc';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -67,7 +67,9 @@ export function BlockComponent({ id, hideLinks }: BlockComponentProps) {
         </>
       )}
       <li>
-        <strong>Height</strong>: {block.height}
+        <strong>Height</strong>: {block.height} [
+        <Link href={`/explorer/tree/${block.height}`}>View tree at height</Link>
+        ]
       </li>
       <li>
         <strong>

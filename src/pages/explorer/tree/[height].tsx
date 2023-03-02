@@ -1,6 +1,6 @@
 import { ExplorerLayout } from 'client/components/layout';
-import { trpc } from 'client/trpc';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const ChainComponent = dynamic(
   () => import('client/components/explorer/chain'),
@@ -9,12 +9,14 @@ const ChainComponent = dynamic(
   }
 );
 
-export default function ExplorerPage() {
-  const { data: tip } = trpc.blocks.getChainTip.useQuery();
+export default function TreePage() {
+  const router = useRouter();
+
+  const height = parseInt(String(router.query.height));
 
   return (
     <ExplorerLayout>
-      {tip ? <ChainComponent tipHeight={tip.height} /> : null}
+      {isNaN(height) ? null : <ChainComponent tipHeight={height} />}
     </ExplorerLayout>
   );
 }

@@ -8,14 +8,12 @@ export interface ViewportProps {
   screenHeight: number;
   worldWidth: number;
   worldHeight: number;
+  centerX: number;
+  centerY: number;
 }
 
 interface OriginalViewportProps extends ViewportProps {
   app: Application;
-  screenWidth: number;
-  screenHeight: number;
-  worldWidth: number;
-  worldHeight: number;
 }
 
 type PixiViewportProps = React.PropsWithChildren<
@@ -28,7 +26,7 @@ const ViewportComponent = PixiComponent<PixiViewportProps, PixiViewport>(
   'Viewport',
   {
     create(props) {
-      const { app, ...viewportProps } = props;
+      const { app, centerX, centerY, ...viewportProps } = props;
 
       const viewport = new PixiViewport({
         interaction: app.renderer.plugins.interaction,
@@ -46,6 +44,11 @@ const ViewportComponent = PixiComponent<PixiViewportProps, PixiViewport>(
         maxWidth: 4000,
         maxHeight: 4000
       });
+
+      viewport.moveCenter(
+        viewport.center.x + centerX,
+        viewport.center.y + centerY
+      );
 
       return viewport;
     },
@@ -67,7 +70,12 @@ const ViewportComponent = PixiComponent<PixiViewportProps, PixiViewport>(
 
       Object.keys(newProps).forEach((prop) => {
         const p = prop as keyof OriginalViewportProps;
-        if (oldProps[p] !== newProps[p] && p !== 'app') {
+        if (
+          oldProps[p] !== newProps[p] &&
+          p !== 'app' &&
+          p !== 'centerX' &&
+          p !== 'centerY'
+        ) {
           viewport[p] = newProps[p];
         }
       });

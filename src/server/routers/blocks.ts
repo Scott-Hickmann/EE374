@@ -25,26 +25,34 @@ export const blocksRouter = router({
   getChildren: databaseProcedure.input(Id).query(({ input }) => {
     return getChildBlocks(input);
   }),
+  getChainTip: databaseProcedure.query(() => {
+    return getChainTip();
+  }),
   getTree: databaseProcedure
     .input(
       z.object({
         limit: z.number().min(1).max(100),
-        cursor: z.number().nullish() // <-- "cursor" needs to exist, but can be any type
+        chainTipHeight: z.number().min(0),
+        cursor: z.number().nullish()
       })
     )
-    .query(async ({ input: { limit, cursor } }) => {
+    .query(async ({ input: { limit, cursor, chainTipHeight } }) => {
       if (cursor == null) {
-        const chainTip = await getChainTip();
-        cursor = chainTip ? chainTip.height + 1 : 0;
+        cursor = chainTipHeight + 1;
       }
       const { tree, isEmpty } = await getTree({
         minHeight: cursor - limit,
         maxHeight: cursor
       });
-      let nextCursor: number | undefined = undefined;
-      if (!isEmpty) {
-        nextCursor = cursor - limit;
+      let nextCursor: number | undefined = cursor - limit;
+      let previousCursor: number | undefined = cursor + limit;
+      if (isEmpty) {
+        if (nextCursor <= 0) {
+          nextCursor = undefined;
+        } else {
+          previousCursor = undefined;
+        }
       }
-      return { tree, nextCursor };
+      return { tree, nextCursor, previousCursor };
     })
 });
