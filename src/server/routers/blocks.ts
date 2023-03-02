@@ -3,11 +3,10 @@ import { Id } from 'common/id';
 import {
   createBlock,
   getBlockById,
-  getChain,
+  getChainTip,
   getChildBlocks,
   getTree
 } from 'server/controllers/blocks';
-import { BlockModel } from 'server/models/block';
 import {
   adminDatabaseProcedure,
   databaseProcedure
@@ -26,34 +25,26 @@ export const blocksRouter = router({
   getChildren: databaseProcedure.input(Id).query(({ input }) => {
     return getChildBlocks(input);
   }),
-  getChain: databaseProcedure
+  getTree: databaseProcedure
     .input(
       z.object({
-        limit: z.number().min(1).max(100).nullish(),
-        cursor: Id.nullish() // <-- "cursor" needs to exist, but can be any type
+        limit: z.number().min(1).max(100),
+        cursor: z.number().nullish() // <-- "cursor" needs to exist, but can be any type
       })
     )
-    .query(async ({ input }) => {
-      let cursor: string;
-      const blockIds: string[] = [];
-      if (input.cursor) {
-        cursor = input.cursor;
-      } else {
-        // TODO: Get longest chain tip
-        const [block] = await BlockModel.find({})
-          .sort({ created: -1 })
-          .limit(1);
-        blockIds.push(block.id);
-        cursor = block.id;
+    .query(async ({ input: { limit, cursor } }) => {
+      if (cursor == null) {
+        const chainTip = await getChainTip();
+        cursor = chainTip ? chainTip.height + 1 : 0;
       }
-      blockIds.push(...(await getChain(cursor, input.limit ?? undefined)));
-      let nextCursor: typeof cursor | undefined = undefined;
-      if (blockIds.length > 0) {
-        nextCursor = blockIds[blockIds.length - 1];
+      const { tree, isEmpty } = await getTree({
+        minHeight: cursor - limit,
+        maxHeight: cursor
+      });
+      let nextCursor: number | undefined = undefined;
+      if (!isEmpty) {
+        nextCursor = cursor - limit;
       }
-      return { blockIds, nextCursor };
-    }),
-  getTree: databaseProcedure.query(async () => {
-    return getTree();
-  })
+      return { tree, nextCursor };
+    })
 });

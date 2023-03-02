@@ -40,6 +40,13 @@ const ViewportComponent = PixiComponent<PixiViewportProps, PixiViewport>(
         (viewport[plugin] as () => void)();
       });
 
+      viewport.clampZoom({
+        minWidth: 500,
+        minHeight: 500,
+        maxWidth: 4000,
+        maxHeight: 4000
+      });
+
       return viewport;
     },
     applyProps(viewport, _oldProps, _newProps) {

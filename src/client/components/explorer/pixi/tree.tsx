@@ -10,20 +10,30 @@ import {
 import { Line } from './line';
 
 export interface PixiTreeProps {
-  tree: Block[][];
+  tree: Record<number, Block[]>;
   x: number;
   y: number;
   color: string;
   onClick?: (id: string) => void;
 }
 
+export function getBounds(y: number, tree: Record<number, Block[]>) {
+  const topY = y + BLOCK_V_OFFSET;
+  const bottomY = y + Object.keys(tree).length * BLOCK_V_OFFSET + BLOCK_HEIGHT;
+  return { topY, bottomY };
+}
+
 export function PixiTree({
-  tree: rawTree,
+  tree: unsortedTree,
   x,
   y,
   color,
   onClick
 }: PixiTreeProps) {
+  // Sort unsortedTree by key
+  const rawTree = Object.entries(unsortedTree)
+    .sort(([a], [b]) => parseInt(a) - parseInt(b))
+    .map(([, value]) => value);
   const tree: Block[][] = [];
   rawTree.forEach((row, i) => {
     if (i === 0) {

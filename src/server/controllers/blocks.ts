@@ -17,71 +17,30 @@ export async function getChildBlocks(id: Id): Promise<Block[]> {
   return docs.map(docToBlock);
 }
 
-export async function getChain(id: Id, limit = 10): Promise<string[]> {
-  const [res] = await BlockModel.aggregate<{
-    chain: string[];
-  }>([
-    { $match: { id: id } },
-    {
-      $graphLookup: {
-        from: 'blocks',
-        startWith: '$previd',
-        connectFromField: 'previd',
-        connectToField: 'id',
-        as: 'chain',
-        maxDepth: limit,
-        depthField: 'depth'
-      }
-    },
-    { $unwind: '$chain' },
-    { $sort: { 'chain.depth': 1 } },
-    {
-      $group: {
-        _id: '$_id',
-        chain: { $push: '$chain.id' }
-      }
-    },
-    { $project: { chain: 1 } }
-  ]);
-  return res?.chain ?? [];
+export async function getChainTip(): Promise<Block | null> {
+  const [doc] = await BlockModel.find({})
+    .sort({ height: -1, created: 1 })
+    .limit(1);
+  return doc ? docToBlock(doc) : null;
 }
 
-export async function getChainReverse(id: Id, limit = 10): Promise<string[]> {
-  const [res] = await BlockModel.aggregate<{
-    chain: string[];
-  }>([
-    { $match: { id: id } },
-    {
-      $graphLookup: {
-        from: 'blocks',
-        startWith: '$id',
-        connectFromField: 'id',
-        connectToField: 'previd',
-        as: 'chain',
-        maxDepth: limit,
-        depthField: 'depth'
-      }
-    },
-    { $unwind: '$chain' },
-    { $sort: { 'chain.depth': 1 } },
-    {
-      $group: {
-        _id: '$_id',
-        chain: { $push: '$chain.id' }
-      }
-    },
-    { $project: { chain: 1 } }
-  ]);
-  return res?.chain ?? [];
-}
-
-export async function getTree() {
-  const docs = await BlockModel.find().sort({ height: 1 });
-  const tree: Block[][] = [];
+export async function getTree({
+  minHeight,
+  maxHeight
+}: {
+  minHeight?: number;
+  maxHeight?: number;
+}) {
+  const docs = await BlockModel.find({
+    height: { $gte: minHeight, $lt: maxHeight }
+  }).sort({ height: 1 });
+  const tree: Record<number, Block[]> = {};
+  let isEmpty = true;
   for (const doc of docs) {
     const height = doc.height;
-    if (!tree[height]) tree.push([]);
+    if (!tree[height]) tree[height] = [];
     tree[height].push(docToBlock(doc));
+    isEmpty = false;
   }
-  return tree;
+  return { tree, isEmpty };
 }

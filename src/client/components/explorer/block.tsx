@@ -67,6 +67,9 @@ export function BlockComponent({ id, hideLinks }: BlockComponentProps) {
         </>
       )}
       <li>
+        <strong>Height</strong>: {block.height}
+      </li>
+      <li>
         <strong>
           {block.txids.length} transaction{block.txids.length > 1 ? 's' : ''}
         </strong>
