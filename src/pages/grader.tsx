@@ -84,6 +84,7 @@ export default function GraderPage() {
                     <option value={2}>PSET 2</option>
                     <option value={3}>PSET 3</option>
                     <option value={4}>PSET 4</option>
+                    <option value={5}>PSET 5</option>
                   </Select>
                   <Button
                     disabled={!ip || !pset || isRunning}
