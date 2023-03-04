@@ -15,8 +15,7 @@ export default function ExplorerPage() {
 
   return (
     <ExplorerLayout>
-      <Text>Down for maintenance</Text>
-      {/* {tip ? <ChainComponent tipHeight={tip.height} /> : null} */}
+      {tip ? <ChainComponent tipHeight={tip.height} /> : null}
     </ExplorerLayout>
   );
 }
