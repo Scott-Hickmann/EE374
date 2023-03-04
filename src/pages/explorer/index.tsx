@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import { ExplorerLayout } from 'client/components/layout';
 import { trpc } from 'client/trpc';
 import dynamic from 'next/dynamic';
@@ -14,7 +15,8 @@ export default function ExplorerPage() {
 
   return (
     <ExplorerLayout>
-      {tip ? <ChainComponent tipHeight={tip.height} /> : null}
+      <Text>Down for maintenance</Text>
+      {/* {tip ? <ChainComponent tipHeight={tip.height} /> : null} */}
     </ExplorerLayout>
   );
 }
