@@ -118,7 +118,7 @@ by the miner confirming the transaction.
 
 If the transaction is a coinbase transaction, then it will not contain an `inputs` key but it
 will contain a `height` key with the block's height as the value. The coinbase transaction cannot
-we spent in the same block.
+be spent in the same block. Additionally, every non-coinbase transaction should have at least one input.
 
 ```json
 {
