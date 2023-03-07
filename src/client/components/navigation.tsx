@@ -1,14 +1,17 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+import { CloseIcon, HamburgerIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
   chakra,
   Flex,
   HStack,
+  IconButton,
   Link,
+  Stack,
   Text,
   useColorMode,
-  useColorModeValue
+  useColorModeValue,
+  useDisclosure
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import React, { ReactElement } from 'react';
@@ -72,6 +75,7 @@ function NavLink({ href, children }: NavLinkProps): ReactElement {
 
 export default function Navigation(): ReactElement {
   const { colorMode, toggleColorMode } = useColorMode();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box
@@ -85,6 +89,13 @@ export default function Navigation(): ReactElement {
       zIndex={999}
     >
       <HStack h={16} align="center" justify="space-between" spacing={4}>
+        <IconButton
+          size={'md'}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+          aria-label="Open Menu"
+          display={{ lg: 'none' }}
+          onClick={isOpen ? onClose : onOpen}
+        />
         <HStack
           spacing={{ base: 4, lg: 8 }}
           align="center"
@@ -125,6 +136,17 @@ export default function Navigation(): ReactElement {
           </Flex>
         </HStack>
       </HStack>
+      {isOpen ? (
+        <Box pb={4} display={{ lg: 'none' }}>
+          <Stack as={'nav'} spacing={4}>
+            {routes.map(({ title, link }) => (
+              <NavLink key={title} href={link}>
+                {title}
+              </NavLink>
+            ))}
+          </Stack>
+        </Box>
+      ) : null}
     </Box>
   );
 }
