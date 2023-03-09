@@ -67,7 +67,7 @@ function changeCursorMode(app: Application, cursorMode: string) {
 }
 
 export function PixiBlock({ block, x, y, color, onClick }: PixiBlockProps) {
-  const dateString = new Date(block.created * 1000).toUTCString();
+  const dateString = new Date(block.created * 1000).toLocaleString();
 
   const rectX = x - BLOCK_WIDTH / 2;
   const rectY = y;

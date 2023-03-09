@@ -18,7 +18,7 @@ export function BlockComponent({ id, hideLinks }: BlockComponentProps) {
 
   if (!block) return null;
 
-  const dateString = new Date(block.created * 1000).toUTCString();
+  const dateString = new Date(block.created * 1000).toLocaleString();
 
   return (
     <ul>
