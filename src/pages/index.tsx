@@ -447,12 +447,6 @@ const syllabus: SyllabusWeek[] = [
         ]
       },
       {
-        title: 'Problem Set 6 Hard Deadline',
-        date: new Date(2023, 2, 9, 13, 15),
-        content: [hardGradingDeadlineMessage],
-        type: 'psetHard'
-      },
-      {
         title: 'Lecture 16: Longest Chain Proof of Stake (II)',
         date: new Date(2023, 2, 9, 13, 30),
         content: [
@@ -468,10 +462,10 @@ const syllabus: SyllabusWeek[] = [
     title: 'Week 10',
     items: [
       {
-        title: 'Theory Exercise 3 Deadline',
+        title: 'Problem Set 6 Hard Deadline',
         date: new Date(2023, 2, 13, 13, 15),
-        content: [theoryExerciseDeadlineMessage],
-        type: 'theoryExercise'
+        content: [hardGradingDeadlineMessage],
+        type: 'psetHard'
       },
       {
         title: 'Lecture 17: BFT Proof of Stake (I)',
@@ -483,6 +477,12 @@ const syllabus: SyllabusWeek[] = [
           'The unpredictability game',
           'Towards instant finality'
         ]
+      },
+      {
+        title: 'Theory Exercise 3 Deadline',
+        date: new Date(2023, 2, 16, 13, 15),
+        content: [theoryExerciseDeadlineMessage],
+        type: 'theoryExercise'
       },
       {
         title: 'Lecture 18: BFT Proof of Stake (II)',
