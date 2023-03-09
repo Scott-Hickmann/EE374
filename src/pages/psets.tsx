@@ -147,7 +147,10 @@ export default function PSETsPage() {
                 >
                   Problem Set 6
                 </PSET>
-                <PSET hardDeadline={new Date(2023, 2, 13, 13, 15)}>
+                <PSET
+                  hardDeadline={new Date(2023, 2, 13, 13, 15)}
+                  link="/psets/EE374_Theory_Exercise_3.pdf"
+                >
                   Theory Exercise 3
                 </PSET>
                 <PSET hardDeadline={new Date(2023, 2, 20, 13, 15)}>
