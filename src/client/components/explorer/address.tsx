@@ -25,9 +25,9 @@ export function AddressComponent({ id }: AddressComponentProps) {
       <div>
         <strong>{account.transactionIds.length} transaction outputs</strong>:{' '}
         <ol>
-          {account.transactionIds.map((transactionId, index) => (
+          {account.transactionIds.map((transactionId) => (
             <li key={transactionId}>
-              {index + 1}. <TransactionLink id={transactionId} />
+              <TransactionLink id={transactionId} />
             </li>
           ))}
         </ol>
