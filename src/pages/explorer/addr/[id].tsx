@@ -1,4 +1,6 @@
+import { Heading } from '@chakra-ui/react';
 import { AddressComponent } from 'client/components/explorer/address';
+import { ExplorerContainer } from 'client/components/explorer/container';
 import { ExplorerLayout } from 'client/components/layout';
 import { useRouter } from 'next/router';
 
@@ -7,10 +9,12 @@ export default function AddressPage() {
 
   return (
     <ExplorerLayout>
-      <h1>EE374 Explorer TX</h1>
-      {router.query.id !== undefined && (
-        <AddressComponent id={String(router.query.id)} />
-      )}
+      <ExplorerContainer>
+        <Heading>Address</Heading>
+        {router.query.id !== undefined && (
+          <AddressComponent id={String(router.query.id)} />
+        )}
+      </ExplorerContainer>
     </ExplorerLayout>
   );
 }
