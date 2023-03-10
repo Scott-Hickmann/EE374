@@ -1,19 +1,17 @@
 import { ExplorerLayout } from 'client/components/layout';
+import { trpc } from 'client/trpc';
 import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
 
 const TreeComponent = dynamic(() => import('client/components/explorer/tree'), {
   ssr: false
 });
 
-export default function TreeAtHeightPage() {
-  const router = useRouter();
-
-  const height = parseInt(String(router.query.height));
+export default function TreePage() {
+  const { data: tip } = trpc.blocks.getChainTip.useQuery();
 
   return (
     <ExplorerLayout>
-      {isNaN(height) ? null : <TreeComponent tipHeight={height} />}
+      {tip ? <TreeComponent tipHeight={tip.height} /> : null}
     </ExplorerLayout>
   );
 }

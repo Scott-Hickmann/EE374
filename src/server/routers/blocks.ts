@@ -3,6 +3,7 @@ import { Id } from 'common/id';
 import {
   createBlock,
   getBlockById,
+  getChain,
   getChainTip,
   getChildBlocks,
   getTree
@@ -54,5 +55,26 @@ export const blocksRouter = router({
         }
       }
       return { tree, nextCursor, previousCursor };
+    }),
+  getChain: databaseProcedure
+    .input(
+      z.object({
+        limit: z.number().min(1).max(100),
+        chainTipBlockId: Id,
+        cursor: z.string().nullish()
+      })
+    )
+    .query(async ({ input: { limit, cursor, chainTipBlockId } }) => {
+      if (cursor == null) {
+        cursor = chainTipBlockId;
+      }
+      const { tree, isEmpty } = await getChain(cursor, limit);
+      let nextCursor: string | undefined = cursor;
+      if (!isEmpty) {
+        const lowestHeight = Math.min(...Object.keys(tree).map(Number));
+        const lowestHeightBlock = tree[lowestHeight];
+        nextCursor = lowestHeightBlock[0].id;
+      }
+      return { tree, nextCursor, previousCursor: null };
     })
 });

@@ -1,5 +1,7 @@
-import { useColorModeValue } from '@chakra-ui/color-mode';
 import {
+  Box,
+  Button,
+  Code,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -8,89 +10,31 @@ import {
   ModalOverlay,
   useDisclosure
 } from '@chakra-ui/react';
-import { Stage } from '@pixi/react-pixi';
 import { trpc } from 'client/trpc';
-import { Block } from 'common/block';
 import { Id } from 'common/id';
-import { Viewport as PixiViewport } from 'pixi-viewport';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { Virtuoso } from 'react-virtuoso';
 import { useWindowSize } from 'usehooks-ts';
 
 import { BlockComponent } from './block';
-import { BLOCK_V_OFFSET } from './pixi/block';
-import { getBounds, PixiTree } from './pixi/tree';
-import { Viewport } from './viewport';
 
-const START_Y = 0;
-const LIMIT = 10;
-const SCROLL_BUFFER = 100;
-
-interface UseInfiniteLoadParams {
-  tree: Record<number, Block[]>;
-  viewportRef: React.RefObject<PixiViewport>;
-  fetchPage: () => Promise<unknown>;
-  loadCondition: ({
-    topY,
-    bottomY,
-    viewportTopY,
-    viewportBottomY
-  }: {
-    topY: number;
-    bottomY: number;
-    viewportTopY: number;
-    viewportBottomY: number;
-  }) => boolean;
-  hasMore: boolean | undefined;
-}
-
-const useInfiniteLoad = ({
-  viewportRef,
-  fetchPage,
-  tree,
-  loadCondition,
-  hasMore
-}: UseInfiniteLoadParams) => {
-  useEffect(() => {
-    if (!hasMore) return;
-    const viewport = viewportRef.current;
-    if (!viewport) return;
-    const onDrag = async () => {
-      const { topY, bottomY } = getBounds(START_Y, tree);
-      const { y, height } = viewport.getVisibleBounds();
-      if (
-        loadCondition({
-          topY,
-          bottomY,
-          viewportTopY: y,
-          viewportBottomY: y + height
-        })
-      ) {
-        fetchPage();
-        viewport.off('moved', onDrag);
-      }
-    };
-    viewport.on('moved', onDrag);
-    return () => {
-      viewport.off('moved', onDrag);
-    };
-  }, [viewportRef, tree, fetchPage, loadCondition, hasMore]);
-};
+const LIMIT = 50;
 
 export interface ChainComponentProps {
-  tipHeight: number;
+  chainTipBlockId: string;
 }
 
-export function ChainComponent({ tipHeight }: ChainComponentProps) {
+export function ChainComponent({ chainTipBlockId }: ChainComponentProps) {
   const {
     data,
     fetchNextPage,
     fetchPreviousPage,
     hasNextPage,
     hasPreviousPage
-  } = trpc.blocks.getTree.useInfiniteQuery(
+  } = trpc.blocks.getChain.useInfiniteQuery(
     {
       limit: LIMIT,
-      chainTipHeight: tipHeight
+      chainTipBlockId
     },
     {
       getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -99,27 +43,9 @@ export function ChainComponent({ tipHeight }: ChainComponentProps) {
     }
   );
 
-  const { width: windowWidth, height: windowHeight } = useWindowSize();
-
-  const viewportRef = useRef<PixiViewport>(null);
-
-  const width = windowWidth;
-  const height = windowHeight - 66;
-  const stageOptions = {
-    antialias: true,
-    autoDensity: true,
-    backgroundAlpha: 0
-  } as const;
-
   const [blockId, setBlockId] = useState<Id>();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  const color = useColorModeValue('#000000', '#ffffff');
-
-  const onWheelEvent = (event: Event) => {
-    event.preventDefault();
-  };
 
   const tree = useMemo(
     () =>
@@ -132,65 +58,63 @@ export function ChainComponent({ tipHeight }: ChainComponentProps) {
         : {},
     [data]
   );
+  const sortedTree = Object.entries(tree)
+    .sort(([a], [b]) => parseInt(a) - parseInt(b))
+    .reverse();
 
-  useInfiniteLoad({
-    viewportRef,
-    fetchPage: fetchPreviousPage,
-    tree,
-    loadCondition: ({ topY, viewportTopY }) =>
-      viewportTopY < topY + SCROLL_BUFFER,
-    hasMore: hasPreviousPage
-  });
-  useInfiniteLoad({
-    viewportRef,
-    fetchPage: fetchNextPage,
-    tree,
-    loadCondition: ({ bottomY, viewportBottomY }) =>
-      viewportBottomY > bottomY - SCROLL_BUFFER,
-    hasMore: hasNextPage
-  });
+  const [firstItemIndex, setFirstItemIndex] = useState(1000000);
+
+  const loadPrevious = async () => {
+    if (!hasPreviousPage) return;
+    await fetchPreviousPage();
+    setFirstItemIndex(firstItemIndex - LIMIT);
+  };
+
+  const loadNext = async () => {
+    if (!hasNextPage) return;
+    await fetchNextPage();
+  };
+
+  const { height: windowHeight } = useWindowSize();
 
   return (
     <>
-      <Stage
-        width={width}
-        height={height}
-        options={stageOptions}
-        onMount={(app) => {
-          const canvas = app.view;
-          canvas.addEventListener('wheel', onWheelEvent, false);
-          canvas.addEventListener('mousewheel', onWheelEvent, false);
-          canvas.addEventListener('DOMMouseScroll', onWheelEvent, false);
+      <Virtuoso
+        style={{ height: windowHeight - 66 }}
+        firstItemIndex={firstItemIndex}
+        initialTopMostItemIndex={LIMIT - 1}
+        data={sortedTree}
+        startReached={loadPrevious}
+        endReached={loadNext}
+        itemContent={(index, [key, tree]) => {
+          const height = parseInt(key);
+          const block = tree[0];
+          const dateString = new Date(block.created * 1000).toLocaleString();
+          return (
+            <Box px={4}>
+              {height}.{' '}
+              <Code>
+                <Button
+                  variant="link"
+                  fontFamily="inherit"
+                  color="inherit"
+                  fontWeight="inherit"
+                  fontSize="inherit"
+                  userSelect="auto"
+                  onClick={() => {
+                    setBlockId(block.id);
+                    onOpen();
+                  }}
+                >
+                  {block.id}
+                </Button>
+              </Code>{' '}
+              (Created at: {dateString}, Miner: {block.miner},{' '}
+              {block.txids.length} txs)
+            </Box>
+          );
         }}
-        onUnmount={(app) => {
-          const canvas = app.view;
-          canvas.addEventListener('wheel', onWheelEvent, false);
-          canvas.addEventListener('mousewheel', onWheelEvent, false);
-          canvas.addEventListener('DOMMouseScroll', onWheelEvent, false);
-        }}
-      >
-        <Viewport
-          ref={viewportRef}
-          plugins={['drag', 'pinch', 'wheel']}
-          screenWidth={width}
-          screenHeight={height}
-          worldWidth={1000}
-          worldHeight={1000}
-          centerX={0}
-          centerY={-tipHeight * BLOCK_V_OFFSET}
-        >
-          <PixiTree
-            tree={tree}
-            x={windowWidth / 2}
-            y={START_Y}
-            color={color}
-            onClick={(blockId) => {
-              setBlockId(blockId);
-              onOpen();
-            }}
-          />
-        </Viewport>
-      </Stage>
+      />
       <Modal isOpen={isOpen} onClose={onClose} isCentered size="3xl">
         <ModalOverlay />
         {blockId && (
@@ -206,5 +130,3 @@ export function ChainComponent({ tipHeight }: ChainComponentProps) {
     </>
   );
 }
-
-export default ChainComponent;
