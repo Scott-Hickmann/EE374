@@ -136,7 +136,7 @@ be spent in the same block. Additionally, every non-coinbase transaction should 
 ## Blocks
 
 This represents a block and has the type "block". It contains the key `txids`, which is a list of the txids within
-the block, a `nonce` which is a 32-byte hexified value, a `previd` which is the blockid of the previous block in
+the block, a `nonce` which is a 32-byte hexified value (which may or may not be left-padded with zeros), a `previd` which is the blockid of the previous block in
 the chain, a `created` which is an (integer) UNIX timestamp in seconds, and a `T` which is a 32-byte hexadecimal integer
 and is the mining target. Optionally it can contain a `miner` field and a `note` field, which can be any ASCII-printable
 strings up to 128 characters long each. It can also optionally contain a `studentids` field, which is a list of at most 10 student
