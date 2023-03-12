@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { Id } from './id';
+import { Id, Nonce } from './id';
 
 export const TARGET =
   '00000000abc00000000000000000000000000000000000000000000000000000';
@@ -16,7 +16,7 @@ export const Block = z.object({
   type: z.literal('block'),
   created: z.number().nonnegative(),
   T: z.literal(TARGET),
-  nonce: Id,
+  nonce: Nonce,
   previd: z.union([Id, z.null()]),
   miner: z.optional(CappedString),
   note: z.optional(CappedString),
