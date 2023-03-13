@@ -142,13 +142,13 @@ export default function PSETsPage() {
                 </PSET>
                 <PSET
                   softDeadline={new Date(2023, 2, 7, 13, 15)}
-                  hardDeadline={new Date(2023, 2, 9, 13, 15)}
+                  hardDeadline={new Date(2023, 2, 13, 13, 15)}
                   link="/psets/EE374_PSET_6.pdf"
                 >
                   Problem Set 6
                 </PSET>
                 <PSET
-                  hardDeadline={new Date(2023, 2, 13, 13, 15)}
+                  hardDeadline={new Date(2023, 2, 16, 13, 15)}
                   link="/psets/EE374_Theory_Exercise_3.pdf"
                 >
                   Theory Exercise 3
