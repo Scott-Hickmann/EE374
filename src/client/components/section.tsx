@@ -23,6 +23,9 @@ export type SubsectionTitleProps = React.PropsWithChildren<{
   isMarkdown?: boolean;
 }>;
 export type SubsectionTextProps = React.PropsWithChildren<unknown>;
+export type SyllabusLinkProps = React.PropsWithChildren<{
+  href: string;
+}>;
 export interface TeachingTeamMemberProps {
   name: string;
   workRole: string;
@@ -124,6 +127,16 @@ export function SubsectionLocation(props: TextProps) {
 
 export function SubectionText({ children }: SubsectionTextProps) {
   return <Text>{children}</Text>;
+}
+
+export function SyllabusLink({ href, children }: SyllabusLinkProps) {
+  const primaryColor = 'blue.400';
+
+  return (
+    <Link color={primaryColor} href={href} target="_blank">
+      {children}
+    </Link>
+  );
 }
 
 export function TeachingTeamMember({

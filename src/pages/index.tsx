@@ -23,6 +23,7 @@ import {
   SubsectionTitle,
   SubsectionTitleDate,
   SubsubsectionTitle,
+  SyllabusLink,
   TeachingTeamMember
 } from 'client/components/section';
 import TitleSection from 'client/components/titleSection';
@@ -443,7 +444,13 @@ const syllabus: SyllabusWeek[] = [
           "Proof of Work's perils and environmental impact",
           'Proof of Work vs Proof of Stake',
           'Dangers of Proof of Stake',
-          'The Proof of Stake equation'
+          'The Proof of Stake equation',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_15_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       },
       {
@@ -453,7 +460,13 @@ const syllabus: SyllabusWeek[] = [
           "Proof of Work's perils and environmental impact",
           'Proof of Work vs Proof of Stake',
           'Dangers of Proof of Stake',
-          'The Proof of Stake equation'
+          'The Proof of Stake equation',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_16_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       }
     ]
@@ -475,7 +488,13 @@ const syllabus: SyllabusWeek[] = [
           'Verifiable Random Functions',
           'VRF correctness',
           'The unpredictability game',
-          'Towards instant finality'
+          'Towards instant finality',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_17_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       },
       {
@@ -734,51 +753,11 @@ export default function HomePage() {
                                   {location}
                                 </SubsectionLocation>
                               )}
-                              {content.map((item, index) => {
-                                if (
-                                  title ===
-                                    'Lecture 15: Longest Chain Proof of Stake (I)' &&
-                                  index === 3
-                                ) {
-                                  return [
-                                    <SubectionText key={index}>
-                                      • {item}
-                                    </SubectionText>,
-                                    <Link
-                                      key={index + 1}
-                                      color={primaryColor}
-                                      href="/lecturenotes/EE374_Lecture_15_notes.pdf"
-                                      target="_blank"
-                                    >
-                                      • Lecture notes
-                                    </Link>
-                                  ];
-                                } else if (
-                                  title ===
-                                    'Lecture 16: Longest Chain Proof of Stake (II)' &&
-                                  index === 3
-                                ) {
-                                  return [
-                                    <SubectionText key={index}>
-                                      • {item}
-                                    </SubectionText>,
-                                    <Link
-                                      key={index + 1}
-                                      color={primaryColor}
-                                      href="/lecturenotes/EE374_Lecture_16_notes.pdf"
-                                      target="_blank"
-                                    >
-                                      • Lecture notes
-                                    </Link>
-                                  ];
-                                } else {
-                                  return (
-                                    <SubectionText key={index}>
-                                      • {item}
-                                    </SubectionText>
-                                  );
-                                }
-                              })}
+                              {content.map((item, index) => (
+                                <SubectionText key={index}>
+                                  • {item}
+                                </SubectionText>
+                              ))}
                             </AccordionPanel>
                           </AccordionItem>
                         </Accordion>
