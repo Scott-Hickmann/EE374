@@ -69,13 +69,14 @@ export default function ExamsPage() {
                 >
                   Practice Midterm
                 </Exam>
-              </Tbody>
-              <Tbody>
                 <Exam
                   link="/midterm/EE374_Winter_2023_Midterm.pdf"
                   solutionsLink="/midterm/EE374_Winter_2023_Midterm_Solutions.pdf"
                 >
                   Winter 2023 Midterm
+                </Exam>
+                <Exam link="/final/EE374_Practice_Final.pdf">
+                  Practice Final
                 </Exam>
               </Tbody>
             </Table>
