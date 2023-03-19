@@ -508,7 +508,13 @@ const syllabus: SyllabusWeek[] = [
         date: new Date(2023, 2, 16, 13, 30),
         content: [
           'The Streamlet protocol and its proof of safety',
-          'Accountability and slashing'
+          'Accountability and slashing',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_18_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       },
       {
@@ -519,7 +525,13 @@ const syllabus: SyllabusWeek[] = [
           'This lecture will be held in Room 380-380F (https://25live.collegenet.com/pro/stanford#!/home/location/137/details)',
           'Permissioned vs Proof of Stake: static vs dynamic stake',
           'Stake grinding attacks and their mitigations',
-          'Stake unbonding and long range attacks and their mitigations'
+          'Stake unbonding and long range attacks and their mitigations',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_19_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       },
       {
@@ -530,7 +542,13 @@ const syllabus: SyllabusWeek[] = [
           'This lecture will be held in Room 380-380F (https://25live.collegenet.com/pro/stanford#!/home/location/137/details)',
           'Permissioned vs Proof of Stake: static vs dynamic stake',
           'Stake grinding attacks and their mitigations',
-          'Stake unbonding and long range attacks and their mitigations'
+          'Stake unbonding and long range attacks and their mitigations',
+          <SyllabusLink
+            key="lecturenotes"
+            href="/lecturenotes/EE374_Lecture_19_notes.pdf"
+          >
+            Lecture notes
+          </SyllabusLink>
         ]
       }
     ]
