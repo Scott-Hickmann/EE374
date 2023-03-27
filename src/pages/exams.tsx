@@ -81,6 +81,12 @@ export default function ExamsPage() {
                 >
                   Practice Final
                 </Exam>
+                <Exam
+                  link="/final/EE374_Winter_2023_Final.pdf"
+                  solutionsLink="/final/EE374_Winter_2023_Final_Solutions.pdf"
+                >
+                  Winter 2023 Final
+                </Exam>
               </Tbody>
             </Table>
           </Subsection>
