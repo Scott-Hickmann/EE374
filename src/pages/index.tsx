@@ -709,6 +709,29 @@ export default function HomePage() {
               .
             </SubectionText>
           </Subsection>
+          <Subsection>
+            <SubsectionTitle color={section1SubsectionTitleColor}>
+              Archived Course Versions
+            </SubsectionTitle>
+            <SubectionText>
+              Spring 2022:{' '}
+              <Link
+                color={primaryColor}
+                href="https://web.stanford.edu/class/ee374/old.html"
+              >
+                https://web.stanford.edu/class/ee374/old.html
+              </Link>
+            </SubectionText>
+            <SubectionText>
+              Winter 2021:{' '}
+              <Link
+                color={primaryColor}
+                href="https://web.stanford.edu/class/archive/ee/ee374/ee374.1214"
+              >
+                https://web.stanford.edu/class/archive/ee/ee374/ee374.1214
+              </Link>
+            </SubectionText>
+          </Subsection>
         </Section>
       </Sections>
       <Section id="syllabus" bg={useColorModeValue('gray.200', 'gray.700')}>
